@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html> 
+<head>
+<title>The Spread of U.S. Slavery, 1790&ndash;1860</title>
+<meta name="author" content="Lincoln Mullen">
+<meta name="description" content="An interactive map showing how slavery 
+spread across the United States.">
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.1.1/css/normalize.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.1.1/css/foundation.min.css">
+<link rel="stylesheet" href="http://d3js.org/colorbrewer.v1.css"></script>
+<link rel="stylesheet" href="style.css">
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js" charset="utf-8"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-25121492-1', 'lincolnmullen.com');
+  ga('send', 'pageview');
+</script>
+
+</head>
+<body>
+<div class="row">
+  <h1>The Spread of U.S. Slavery, 1790&ndash;1860</h1>
+</div>
+<div class="row">
+  <div id="viz"></div>
+</div>
+<div class="row">
+  <div class="small-8 columns">
+    <div id="slider"></div>
+  </div>
+  <div class="small-4 columns">
+    <div id="selector"></div>
+  </div>
+</div>
+<div class="row">
+  <hr>
+</div>
+<div class="row">
+  <div id="description">
+    <p>
+    <strong>How to use this map:</strong> Zoom to any county by clicking on 
+    it. Clicking on the same county will zoom out.
+    </p>
+    <p>
+    The U.S. Census data and shapefiles for these maps comes from Minnesota 
+    Population Center, <a href="https://www.nhgis.org/"><em>National 
+    Historical Geographic Information System</em></a>, version 2.0 
+(Minneapolis, MN: University of Minnesota, 
+    2011). For a description of the questions asked on the 1790 to 1860 
+         censuses, see <a 
+    href="http://www.census.gov/population/www/censusdata/hiscendata.html"><em>Measuring 
+  America: The Decennial Censuses From 1790 to 2000</em></a> (U.S Census 
+  Bureau, 2002).
+    </p>
+    <p>
+    Map by <a href="http://lincolnmullen.com">Lincoln Mullen</a>. <a 
+      href="https://github.com/lmullen/slavery-nhgis">Code</a> available on 
+    GitHub,
+    licensed <a href="http://lmullen.mit-license.org/">MIT</a>. Suggestions 
+    welcome <a 
+    href="https://github.com/lmullen/slavery-nhgis/issues">here</a>.
+    </p>
+  </div>
+</div>
+</div>
+<script src="visualization.js"></script>
+<p id="back-link">
+<a href="http://lincolnmullen.com">&larr; Back to home page</a>
+</p>
+</body>
+</html>

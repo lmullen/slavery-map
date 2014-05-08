@@ -1,0 +1,153 @@
+path {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+h1 {
+  font-size: 2rem;
+  margin: 20px 0 20px 0;
+}
+
+.counties {
+  fill: white;
+  stroke: #bbb;
+  stroke-width: 0.25;
+  cursor: pointer;
+}
+
+.states {
+  fill: none;
+  stroke: black;
+  stroke-width: 0.5;
+  pointer-events: none;
+}
+
+.country {
+  fill: none;
+  stroke: black;
+  stroke-width: 1;
+  pointer-events: none;
+}
+
+.coast {
+  fill: none;
+  stroke: #aaa;
+  stroke-width: 1.25;
+}
+
+.rivers {
+  fill: none;
+  stroke: blue;
+}
+
+.tooltip {
+  color: #222;
+  background: #fff;
+  padding: .5em;
+  text-shadow: #f5f5f5 0 1px 0;
+  border-radius: 10px;
+  border-color: #a6a6a6;
+  border-width: 1px;
+  border-style: solid;
+  box-shadow: 0px 0px 2px 0px #a6a6a6; 
+  opacity: 0.9; 
+  position: absolute;
+  width: 225px;
+  display: block;
+}
+
+.tooltip h5 {
+  font-size: 0.95rem;
+}
+
+.tooltip p {
+  font-size: 0.80rem;
+}
+
+.num {
+  float: right;
+  margin-right: 0.5rem;
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.axis {
+  font: 10px sans-serif;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.axis .domain {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .3;
+  stroke-width: 10px;
+  stroke-linecap: round;
+}
+
+.axis .halo {
+  fill: none;
+  stroke: #ddd;
+  stroke-width: 8px;
+  stroke-linecap: round;
+}
+
+.slider .handle {
+  fill: #fff;
+  stroke: #000;
+  stroke-opacity: .5;
+  stroke-width: 1.25px;
+  pointer-events: none;
+}
+
+body #back-link {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  margin: 10px;
+}
+
+.date-label {
+  font-size: 24px;
+}
+
+.legend-colors circle {
+  stroke: black;
+  stroke-width: 0.5;
+}
+
+.legend-colors {
+  font-size: 0.85rem;
+}
+
+/* .divider { */
+/*   margin: 20px 0 20px 0; */
+/* } */
+
+.variable-selector {
+  margin-top: 10px;
+}
+
+.loading {
+  position: fixed;
+  top: 40%;
+  left:50%;
+  text-align: center;
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.active {
+  stroke: black!important;
+  stroke-width: 0.75!important;
+  stroke-linecap: round!important;
+  stroke-linejoin: round!important;
+}
