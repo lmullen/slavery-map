@@ -1,0 +1,232 @@
+--------------------------------------------------------------------------------
+Codebook for NHGIS data file 'nhgis0013_ds10_1850_county'
+--------------------------------------------------------------------------------
+ 
+Contents
+    - Data Summary
+    - Data Dictionary
+    - Citation and Use
+ 
+Additional documentation on NHGIS data sources is available at: 
+    https://www.nhgis.org/documentation/tabular-data 
+ 
+--------------------------------------------------------------------------------
+Data Summary
+--------------------------------------------------------------------------------
+ 
+Year:             1850
+Geographic level: County (by State)
+Dataset:          1850 Census: Population, Agriculture & Other Data [US, States & Counties]
+   NHGIS code:    1850_cPAX
+   NHGIS ID:      ds10
+ 
+Tables:
+ 
+1. Race/Slave Status by Sex by Age
+   Universe:    Persons
+   Source code: NT4
+   NHGIS code:  AEL
+ 
+2. Race/Slave Status by Sex
+   Universe:    Persons
+   Source code: NT5
+   NHGIS code:  AEW
+ 
+3. Race/Slave Status
+   Universe:    Persons
+   Source code: NT6
+   NHGIS code:  AE6
+ 
+4. Births by Slave Status
+   Universe:    Births During the Year Ending June 1, 1850
+   Source code: NT10
+   NHGIS code:  ADR
+ 
+5. Deaths During the Year Ending June 1, 1850 by Slave Status
+   Universe:    Deaths During the Year Ending June 1, 1850
+   Source code: NT15
+   NHGIS code:  ADV
+ 
+--------------------------------------------------------------------------------
+Data Dictionary
+--------------------------------------------------------------------------------
+ 
+Context Fields 
+    GISJOIN:     GIS Join Match Code
+    YEAR:        Data File Year
+    STATE:       State Name
+    STATEA:      State Code
+    COUNTY:      County Name
+    COUNTYA:     County Code
+    AREANAME:    Area name
+ 
+Table 1:     Race/Slave Status by Sex by Age
+Universe:    Persons
+Source code: NT4
+NHGIS code:  AEL
+    AEL001:      White >> Male >> Under 1 year of age
+    AEL002:      White >> Male >> 1 to 4 years of age
+    AEL003:      White >> Male >> 5 to 9 years of age
+    AEL004:      White >> Male >> 10 to 14 years of age
+    AEL005:      White >> Male >> 15 to 19 years of age
+    AEL006:      White >> Male >> 20 to 29 years of age
+    AEL007:      White >> Male >> 30 to 39 years of age
+    AEL008:      White >> Male >> 40 to 49 years of age
+    AEL009:      White >> Male >> 50 to 59 years of age
+    AEL010:      White >> Male >> 60 to 69 years of age
+    AEL011:      White >> Male >> 70 to 79 years of age
+    AEL012:      White >> Male >> 80 to 89 years of age
+    AEL013:      White >> Male >> 90 to 99 years of age
+    AEL014:      White >> Male >> 100 years of age and over
+    AEL015:      White >> Male >> Age unknown
+    AEL016:      White >> Female >> Under 1 year of age
+    AEL017:      White >> Female >> 1 to 4 years of age
+    AEL018:      White >> Female >> 5 to 9 years of age
+    AEL019:      White >> Female >> 10 to 14 years of age
+    AEL020:      White >> Female >> 15 to 19 years of age
+    AEL021:      White >> Female >> 20 to 29 years of age
+    AEL022:      White >> Female >> 30 to 39 years of age
+    AEL023:      White >> Female >> 40 to 49 years of age
+    AEL024:      White >> Female >> 50 to 59 years of age
+    AEL025:      White >> Female >> 60 to 69 years of age
+    AEL026:      White >> Female >> 70 to 79 years of age
+    AEL027:      White >> Female >> 80 to 89 years of age
+    AEL028:      White >> Female >> 90 to 99 years of age
+    AEL029:      White >> Female >> 100 years of age and over
+    AEL030:      White >> Female >> Age unknown
+    AEL031:      Nonwhite: Free >> Male >> Under 1 year of age
+    AEL032:      Nonwhite: Free >> Male >> 1 to 4 years of age
+    AEL033:      Nonwhite: Free >> Male >> 5 to 9 years of age
+    AEL034:      Nonwhite: Free >> Male >> 10 to 14 years of age
+    AEL035:      Nonwhite: Free >> Male >> 15 to 19 years of age
+    AEL036:      Nonwhite: Free >> Male >> 20 to 29 years of age
+    AEL037:      Nonwhite: Free >> Male >> 30 to 39 years of age
+    AEL038:      Nonwhite: Free >> Male >> 40 to 49 years of age
+    AEL039:      Nonwhite: Free >> Male >> 50 to 59 years of age
+    AEL040:      Nonwhite: Free >> Male >> 60 to 69 years of age
+    AEL041:      Nonwhite: Free >> Male >> 70 to 79 years of age
+    AEL042:      Nonwhite: Free >> Male >> 80 to 89 years of age
+    AEL043:      Nonwhite: Free >> Male >> 90 to 99 years of age
+    AEL044:      Nonwhite: Free >> Male >> 100 years of age and over
+    AEL045:      Nonwhite: Free >> Male >> Age unknown
+    AEL046:      Nonwhite: Free >> Female >> Under 1 year of age
+    AEL047:      Nonwhite: Free >> Female >> 1 to 4 years of age
+    AEL048:      Nonwhite: Free >> Female >> 5 to 9 years of age
+    AEL049:      Nonwhite: Free >> Female >> 10 to 14 years of age
+    AEL050:      Nonwhite: Free >> Female >> 15 to 19 years of age
+    AEL051:      Nonwhite: Free >> Female >> 20 to 29 years of age
+    AEL052:      Nonwhite: Free >> Female >> 30 to 39 years of age
+    AEL053:      Nonwhite: Free >> Female >> 40 to 49 years of age
+    AEL054:      Nonwhite: Free >> Female >> 50 to 59 years of age
+    AEL055:      Nonwhite: Free >> Female >> 60 to 69 years of age
+    AEL056:      Nonwhite: Free >> Female >> 70 to 79 years of age
+    AEL057:      Nonwhite: Free >> Female >> 80 to 89 years of age
+    AEL058:      Nonwhite: Free >> Female >> 90 to 99 years of age
+    AEL059:      Nonwhite: Free >> Female >> 100 years of age and over
+    AEL060:      Nonwhite: Free >> Female >> Age unknown
+    AEL061:      Nonwhite: Slave >> Male >> Under 1 year of age
+    AEL062:      Nonwhite: Slave >> Male >> 1 to 4 years of age
+    AEL063:      Nonwhite: Slave >> Male >> 5 to 9 years of age
+    AEL064:      Nonwhite: Slave >> Male >> 10 to 14 years of age
+    AEL065:      Nonwhite: Slave >> Male >> 15 to 19 years of age
+    AEL066:      Nonwhite: Slave >> Male >> 20 to 29 years of age
+    AEL067:      Nonwhite: Slave >> Male >> 30 to 39 years of age
+    AEL068:      Nonwhite: Slave >> Male >> 40 to 49 years of age
+    AEL069:      Nonwhite: Slave >> Male >> 50 to 59 years of age
+    AEL070:      Nonwhite: Slave >> Male >> 60 to 69 years of age
+    AEL071:      Nonwhite: Slave >> Male >> 70 to 79 years of age
+    AEL072:      Nonwhite: Slave >> Male >> 80 to 89 years of age
+    AEL073:      Nonwhite: Slave >> Male >> 90 to 99 years of age
+    AEL074:      Nonwhite: Slave >> Male >> 100 years of age and over
+    AEL075:      Nonwhite: Slave >> Male >> Age unknown
+    AEL076:      Nonwhite: Slave >> Female >> Under 1 year of age
+    AEL077:      Nonwhite: Slave >> Female >> 1 to 4 years of age
+    AEL078:      Nonwhite: Slave >> Female >> 5 to 9 years of age
+    AEL079:      Nonwhite: Slave >> Female >> 10 to 14 years of age
+    AEL080:      Nonwhite: Slave >> Female >> 15 to 19 years of age
+    AEL081:      Nonwhite: Slave >> Female >> 20 to 29 years of age
+    AEL082:      Nonwhite: Slave >> Female >> 30 to 39 years of age
+    AEL083:      Nonwhite: Slave >> Female >> 40 to 49 years of age
+    AEL084:      Nonwhite: Slave >> Female >> 50 to 59 years of age
+    AEL085:      Nonwhite: Slave >> Female >> 60 to 69 years of age
+    AEL086:      Nonwhite: Slave >> Female >> 70 to 79 years of age
+    AEL087:      Nonwhite: Slave >> Female >> 80 to 89 years of age
+    AEL088:      Nonwhite: Slave >> Female >> 90 to 99 years of age
+    AEL089:      Nonwhite: Slave >> Female >> 100 years of age and over
+    AEL090:      Nonwhite: Slave >> Female >> Age unknown
+ 
+Table 2:     Race/Slave Status by Sex
+Universe:    Persons
+Source code: NT5
+NHGIS code:  AEW
+    AEW001:      White >> Male
+    AEW002:      White >> Female
+    AEW003:      Nonwhite: Free >> Male
+    AEW004:      Nonwhite: Free >> Female
+    AEW005:      Nonwhite: Slave >> Male
+    AEW006:      Nonwhite: Slave >> Female
+ 
+Table 3:     Race/Slave Status
+Universe:    Persons
+Source code: NT6
+NHGIS code:  AE6
+    AE6001:      White
+    AE6002:      Nonwhite: Free
+    AE6003:      Nonwhite: Slave
+ 
+Table 4:     Births by Slave Status
+Universe:    Births During the Year Ending June 1, 1850
+Source code: NT10
+NHGIS code:  ADR
+    ADR001:      White and free colored
+    ADR002:      Slave
+ 
+Table 5:     Deaths During the Year Ending June 1, 1850 by Slave Status
+Universe:    Deaths During the Year Ending June 1, 1850
+Source code: NT15
+NHGIS code:  ADV
+    ADV001:      White and free colored
+    ADV002:      Slave
+ 
+--------------------------------------------------------------------------------
+Citation and Use of NHGIS Data
+--------------------------------------------------------------------------------
+ 
+All persons are granted a limited license to use this documentation and the
+accompanying data, subject to the following conditions:
+
+* Publications and research reports employing NHGIS data (either tabular or GIS)
+  must cite it appropriately. The citation should include the following:
+
+    Minnesota Population Center. National Historical Geographic Information
+    System: Version 2.0. Minneapolis, MN: University of Minnesota 2011.
+
+* Publications and research reports employing school attendance areas data
+  (either tabular or GIS) must cite it appropriately. The citation should
+  include the following:
+
+    The College of William and Mary and the Minnesota Population Center.
+    School Attendance Boundary Information System (SABINS): Version 1.0.
+    Minneapolis, MN: University of Minnesota 2011.
+
+* If possible, citations should also include the URL for the NHGIS site:
+
+    https://www.nhgis.org/
+
+* If possible, citations involving school attendance areas should also include
+  the URL for the SABINS site:
+
+    http://www.sabinsdata.org/
+
+In addition, we request that users send us a copy of any publications, research
+reports, or educational material making use of the data or documentation.
+Printed matter should be sent to:
+
+    NHGIS
+    Minnesota Population Center
+    University of Minnesota
+    50 Willey Hall
+    225 19th Ave S
+    Minneapolis, MN 55455
+
+Send electronic material to: nhgis@umn.edu

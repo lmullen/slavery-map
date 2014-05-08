@@ -1,0 +1,140 @@
+--------------------------------------------------------------------------------
+Codebook for NHGIS data file 'nhgis0013_ds7_1840_county'
+--------------------------------------------------------------------------------
+ 
+Contents
+    - Data Summary
+    - Data Dictionary
+    - Citation and Use
+ 
+Additional documentation on NHGIS data sources is available at: 
+    https://www.nhgis.org/documentation/tabular-data 
+ 
+--------------------------------------------------------------------------------
+Data Summary
+--------------------------------------------------------------------------------
+ 
+Year:             1840
+Geographic level: County (by State)
+Dataset:          1840 Census: Population & Other Data [US, States & Counties]
+   NHGIS code:    1840_cPopX
+   NHGIS ID:      ds7
+ 
+Tables:
+ 
+1. Colored Population by Slave Status by Sex by Age
+   Universe:    Colored Persons
+   Source code: NT5
+   NHGIS code:  ACZ
+ 
+2. Race/Slave Status
+   Universe:    Persons
+   Source code: NT25
+   NHGIS code:  ACS
+ 
+3. Colored Population by Slave Status by Sex
+   Universe:    Colored Persons
+   Source code: NT28
+   NHGIS code:  ACU
+ 
+--------------------------------------------------------------------------------
+Data Dictionary
+--------------------------------------------------------------------------------
+ 
+Context Fields 
+    GISJOIN:     GIS Join Match Code
+    YEAR:        Data File Year
+    STATE:       State Name
+    STATEA:      State Code
+    COUNTY:      County Name
+    COUNTYA:     County Code
+    AREANAME:    Area name
+ 
+Table 1:     Colored Population by Slave Status by Sex by Age
+Universe:    Colored Persons
+Source code: NT5
+NHGIS code:  ACZ
+    ACZ001:      Free >> Male >> Under 10 years of age
+    ACZ002:      Free >> Male >> 10 to 23 years of age
+    ACZ003:      Free >> Male >> 24 to 35 years of age
+    ACZ004:      Free >> Male >> 36 to 54 years of age
+    ACZ005:      Free >> Male >> 55 to 99 years of age
+    ACZ006:      Free >> Male >> 100 years of age and over
+    ACZ007:      Free >> Female >> Under 10 years of age
+    ACZ008:      Free >> Female >> 10 to 23 years of age
+    ACZ009:      Free >> Female >> 24 to 35 years of age
+    ACZ010:      Free >> Female >> 36 to 54 years of age
+    ACZ011:      Free >> Female >> 55 to 99 years of age
+    ACZ012:      Free >> Female >> 100 years of age and over
+    ACZ013:      Slave >> Male >> Under 10 years of age
+    ACZ014:      Slave >> Male >> 10 to 23 years of age
+    ACZ015:      Slave >> Male >> 24 to 35 years of age
+    ACZ016:      Slave >> Male >> 36 to 54 years of age
+    ACZ017:      Slave >> Male >> 55 to 99 years of age
+    ACZ018:      Slave >> Male >> 100 years of age and over
+    ACZ019:      Slave >> Female >> Under 10 years of age
+    ACZ020:      Slave >> Female >> 10 to 23 years of age
+    ACZ021:      Slave >> Female >> 24 to 35 years of age
+    ACZ022:      Slave >> Female >> 36 to 54 years of age
+    ACZ023:      Slave >> Female >> 55 to 99 years of age
+    ACZ024:      Slave >> Female >> 100 years of age and over
+ 
+Table 2:     Race/Slave Status
+Universe:    Persons
+Source code: NT25
+NHGIS code:  ACS
+    ACS001:      White
+    ACS002:      Nonwhite: Free
+    ACS003:      Nonwhite: Slave
+ 
+Table 3:     Colored Population by Slave Status by Sex
+Universe:    Colored Persons
+Source code: NT28
+NHGIS code:  ACU
+    ACU001:      Free >> Male
+    ACU002:      Free >> Female
+    ACU003:      Slave >> Male
+    ACU004:      Slave >> Female
+ 
+--------------------------------------------------------------------------------
+Citation and Use of NHGIS Data
+--------------------------------------------------------------------------------
+ 
+All persons are granted a limited license to use this documentation and the
+accompanying data, subject to the following conditions:
+
+* Publications and research reports employing NHGIS data (either tabular or GIS)
+  must cite it appropriately. The citation should include the following:
+
+    Minnesota Population Center. National Historical Geographic Information
+    System: Version 2.0. Minneapolis, MN: University of Minnesota 2011.
+
+* Publications and research reports employing school attendance areas data
+  (either tabular or GIS) must cite it appropriately. The citation should
+  include the following:
+
+    The College of William and Mary and the Minnesota Population Center.
+    School Attendance Boundary Information System (SABINS): Version 1.0.
+    Minneapolis, MN: University of Minnesota 2011.
+
+* If possible, citations should also include the URL for the NHGIS site:
+
+    https://www.nhgis.org/
+
+* If possible, citations involving school attendance areas should also include
+  the URL for the SABINS site:
+
+    http://www.sabinsdata.org/
+
+In addition, we request that users send us a copy of any publications, research
+reports, or educational material making use of the data or documentation.
+Printed matter should be sent to:
+
+    NHGIS
+    Minnesota Population Center
+    University of Minnesota
+    50 Willey Hall
+    225 19th Ave S
+    Minneapolis, MN 55455
+
+Send electronic material to: nhgis@umn.edu

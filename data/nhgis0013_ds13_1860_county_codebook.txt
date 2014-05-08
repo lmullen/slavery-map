@@ -1,0 +1,132 @@
+--------------------------------------------------------------------------------
+Codebook for NHGIS data file 'nhgis0013_ds13_1860_county'
+--------------------------------------------------------------------------------
+ 
+Contents
+    - Data Summary
+    - Data Dictionary
+    - Citation and Use
+ 
+Additional documentation on NHGIS data sources is available at: 
+    https://www.nhgis.org/documentation/tabular-data 
+ 
+--------------------------------------------------------------------------------
+Data Summary
+--------------------------------------------------------------------------------
+ 
+Year:             1860
+Geographic level: County (by State)
+Dataset:          1860 Census: Agriculture Data [US, States & Counties]
+   NHGIS code:    1860_cAg
+   NHGIS ID:      ds13
+ 
+Tables:
+ 
+1. Number of Slaves Held
+   Universe:    Slaveholders
+   Source code: NT12
+   NHGIS code:  AGS
+ 
+2. Total Slaveholders
+   Universe:    Slaveholders
+   Source code: NT13
+   NHGIS code:  AGT
+ 
+3. Total Number of Slaves
+   Universe:    Slaves
+   Source code: NT14
+   NHGIS code:  AGU
+ 
+--------------------------------------------------------------------------------
+Data Dictionary
+--------------------------------------------------------------------------------
+ 
+Context Fields 
+    GISJOIN:     GIS Join Match Code
+    YEAR:        Data File Year
+    STATE:       State Name
+    STATEA:      State Code
+    COUNTY:      County Name
+    COUNTYA:     County Code
+    AREANAME:    Area name
+ 
+Table 1:     Number of Slaves Held
+Universe:    Slaveholders
+Source code: NT12
+NHGIS code:  AGS
+    AGS001:      Holding 1 slave
+    AGS002:      Holding 2 slaves
+    AGS003:      Holding 3 slaves
+    AGS004:      Holding 4 slaves
+    AGS005:      Holding 5 slaves
+    AGS006:      Holding 6 slaves
+    AGS007:      Holding 7 slaves
+    AGS008:      Holding 8 slaves
+    AGS009:      Holding 9 slaves
+    AGS010:      Holding 10 to 14 slaves
+    AGS011:      Holding 15 to 19 slaves
+    AGS012:      Holding 20 to 29 slaves
+    AGS013:      Holding 30 to 39 slaves
+    AGS014:      Holding 40 to 49 slaves
+    AGS015:      Holding 50 to 69 slaves
+    AGS016:      Holding 70 to 99 slaves
+    AGS017:      Holding 100 to 199 slaves
+    AGS018:      Holding 200 to 299 slaves
+    AGS019:      Holding 300 to 499 slaves
+    AGS020:      Holding 500 to 999 slaves
+    AGS021:      Holding 1000 or more slaves
+ 
+Table 2:     Total Slaveholders
+Universe:    Slaveholders
+Source code: NT13
+NHGIS code:  AGT
+    AGT001:      Total
+ 
+Table 3:     Total Number of Slaves
+Universe:    Slaves
+Source code: NT14
+NHGIS code:  AGU
+    AGU001:      Total
+ 
+--------------------------------------------------------------------------------
+Citation and Use of NHGIS Data
+--------------------------------------------------------------------------------
+ 
+All persons are granted a limited license to use this documentation and the
+accompanying data, subject to the following conditions:
+
+* Publications and research reports employing NHGIS data (either tabular or GIS)
+  must cite it appropriately. The citation should include the following:
+
+    Minnesota Population Center. National Historical Geographic Information
+    System: Version 2.0. Minneapolis, MN: University of Minnesota 2011.
+
+* Publications and research reports employing school attendance areas data
+  (either tabular or GIS) must cite it appropriately. The citation should
+  include the following:
+
+    The College of William and Mary and the Minnesota Population Center.
+    School Attendance Boundary Information System (SABINS): Version 1.0.
+    Minneapolis, MN: University of Minnesota 2011.
+
+* If possible, citations should also include the URL for the NHGIS site:
+
+    https://www.nhgis.org/
+
+* If possible, citations involving school attendance areas should also include
+  the URL for the SABINS site:
+
+    http://www.sabinsdata.org/
+
+In addition, we request that users send us a copy of any publications, research
+reports, or educational material making use of the data or documentation.
+Printed matter should be sent to:
+
+    NHGIS
+    Minnesota Population Center
+    University of Minnesota
+    50 Willey Hall
+    225 19th Ave S
+    Minneapolis, MN 55455
+
+Send electronic material to: nhgis@umn.edu
