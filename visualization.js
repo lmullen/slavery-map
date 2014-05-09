@@ -1,5 +1,3 @@
-var loading = d3.select("body").append("p").classed("loading", true).text("Loading the map ...");
-
 queue()
 .defer(d3.json, "coast.json")
 .defer(d3.json, "rivers.json")
@@ -25,6 +23,12 @@ var svg = d3.select("#viz").append("svg")
 .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 .classed("YlOrRd", true)
 .on("click", stopped, true);
+
+var loading = svg.append("text")
+.classed("loading", true)
+.attr("x", width / 2)
+.attr("y", height / 2)
+.text("Loading the map ...");
 
 var slider_height = 20,
     slider_width = 600;

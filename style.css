@@ -134,9 +134,6 @@ body #back-link {
 }
 
 .loading {
-  position: fixed;
-  top: 40%;
-  left:50%;
   text-align: center;
 }
 
