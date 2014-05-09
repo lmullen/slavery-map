@@ -184,17 +184,17 @@ function ready(error, coast, rivers, us_1790, us_1800, us_1810, us_1820,
   .domain([10,50,100,500,1e3,5e3,10e3,50e3,100e3,1e6])
   .range(brewer);
 
-  scales.logTotalPopDensity = d3.scale.log()
-  .domain([0.01, 35441])
-  .rangeRound([0,8]);
+  scales.logTotalPopDensity = d3.scale.threshold()
+  .domain([0.01,1,5,10,25,50,100,500,1e3,50e3])
+  .range(brewer);
 
-  scales.slavePopDensity = d3.scale.log()
-  .domain([0.01, 1416])
-  .rangeRound([0,8]);
+  scales.slavePopDensity = d3.scale.threshold()
+  .domain([0.01,0.5,1,5,10,20,30,40,50,200])
+  .range(brewer);
 
-  scales.percentageSlave = d3.scale.sqrt()
-  .domain([0.01, 93.5])
-  .rangeRound([0,8]);
+  scales.percentageSlave = d3.scale.threshold()
+  .domain([0.1,10,20,30,40,50,60,70,80,100])
+  .range(brewer);
 
   current_scale = scales.logSlaves;
 
@@ -296,31 +296,13 @@ function draw_map(date, variable, scale) {
   .append("path")
   .attr("class", function(d) {
     if (variable === "slaves_per_mile") {
-      if (d.properties.pop_slave === 0) { 
-        return "";
-      } else if (typeof d.properties.pop_slave === "undefined") {
-        return "";
-      } else {
-        return "q" + scale(d.properties.pop_slave / sqMetersToSqMiles(d.properties.area)) + "-9";
-      }
+      return scale(d.properties.pop_slave / sqMetersToSqMiles(d.properties.area));
     } else if (variable === "percentage_enslaved") {
-      if (d.properties.pop_slave === 0) { 
-        return "";
-      } else if (typeof d.properties.pop_slave === "undefined") {
-        return "";
-      } else {
-        return "q" + scale(100 * d.properties.pop_slave / d.properties.pop_total) + "-9";
-      }
+      return scale(100 * d.properties.pop_slave / d.properties.pop_total);
     } else if (variable === "total_per_mile") {
-      if (d.properties.pop_total === 0) { 
-        return "";
-      } else if (typeof d.properties.pop_total === "undefined") {
-        return "";
-      } else {
-        return "q" + scale(d.properties.pop_total / sqMetersToSqMiles(d.properties.area)) + "-9";
-      }
+      return scale(d.properties.pop_total / sqMetersToSqMiles(d.properties.area));
     } else {
-        return scale(d.properties[variable]);
+      return scale(d.properties[variable]);
     }})
   .classed("counties", true)
   .attr("id", function(d) { return d.id; })
@@ -420,15 +402,15 @@ function variable_selected() {
     current_variable = "pop_total";
     current_scale = scales.logPopulation;
   } else if (variable === "Enslaved persons per mile²") {
-    svg.attr("class", "OrRd");
+    svg.attr("class", "YlOrRd");
     draw_map(current_date, "slaves_per_mile", scales.slavePopDensity);
-    update_legend(scales.slavePopDensity, "OrRd");
+    update_legend(scales.slavePopDensity, "YlOrRd");
     current_variable = "slaves_per_mile";
     current_scale = scales.slavePopDensity;
   } else if (variable === "Total persons per mile²") {
-    svg.attr("class", "GnBu");
+    svg.attr("class", "YlGnBu");
     draw_map(current_date, "total_per_mile", scales.logTotalPopDensity);
-    update_legend(scales.logTotalPopDensity, "GnBu");
+    update_legend(scales.logTotalPopDensity, "YlGnBu");
     current_variable = "total_per_mile";
     current_scale = scales.logTotalPopDensity;
   } else if (variable === "Percentage population enslaved") {
