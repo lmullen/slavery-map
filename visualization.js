@@ -56,7 +56,46 @@ selector.html(
 selector
 .on("change", variable_selected);
 
-var scales = {};
+
+var brewer = ["", "q0-9", "q1-9", "q2-9", "q3-9", "q4-9", "q5-9", "q6-9", "q7-9", "q8-9"];
+
+var maps = {
+  "slavePopulation": {
+    "field": "pop_slave",
+    "color": "YlOrRd",
+    "scale": d3.scale.threshold()
+            .domain([1,10,50,100,500,1e3,5e3,10e3,50e3,100e3])
+            .range(brewer)
+  },
+  "totalPopulation": {
+    "field": "pop_total",
+    "color": "YlGnBu",
+    "scale": d3.scale.threshold()
+            .domain([10,50,100,500,1e3,5e3,10e3,50e3,100e3,1e6])
+            .range(brewer)
+  },
+  "slaveDensity": {
+    "field": "slaves_per_mile",
+    "color": "YlOrRd",
+    "scale": d3.scale.threshold()
+            .domain([0.01,0.5,1,5,10,20,30,40,50,200])
+            .range(brewer)
+  },
+  "totalDensity": {
+    "field": "total_per_mile",
+    "color": "YlGnBu",
+    "scale": d3.scale.threshold()
+             .domain([0.01,1,5,10,25,50,100,500,1e3,50e3])
+             .range(brewer)
+  },
+  "slavePercentage": {
+    "field": "percentage_enslaved",
+    "color": "YlOrRd",
+    "scale": d3.scale.threshold()
+            .domain([0.1,10,20,30,40,50,60,70,80,100])
+            .range(brewer)
+  }
+};
 
 var legend = svg
 .append("g")
@@ -154,10 +193,10 @@ var tooltip = d3.select("body").append("div")
 .classed("hidden", true);
 
 var data = {};
-var already_drawn,
-    current_variable = "pop_slave",
-    current_colors   = "YlOrdRd",
-    current_scale    = scales.logSlaves;
+var current = {
+  "year": 1790,
+  "map" : "slavePopulation"
+};
 
 function ready(error, coast, rivers, us_1790, us_1800, us_1810, us_1820,
                us_1830, us_1840, us_1850, us_1860) { 
@@ -175,7 +214,6 @@ function ready(error, coast, rivers, us_1790, us_1800, us_1810, us_1820,
 
   // Calculate derivative properties
   for(var i = 1790; i <= 1860; i += 10) {
-    // console.log(data["us_" + i].objects);
     data["us_" + i].objects["county_" + i].geometries.forEach(function(d) {
       d.properties.percentage_enslaved = 100 * d.properties.pop_slave / d.properties.pop_total;
       d.properties.slaves_per_mile = d.properties.pop_slave / sqMetersToSqMiles(d.properties.area);
@@ -183,42 +221,19 @@ function ready(error, coast, rivers, us_1790, us_1800, us_1810, us_1820,
     });
   }
 
-  // make scales
-
-  var brewer = ["", "q0-9", "q1-9", "q2-9", "q3-9", "q4-9", "q5-9", "q6-9", "q7-9", "q8-9"];
-
-  scales.logSlaves = d3.scale.threshold()
-  .domain([1,10,50,100,500,1e3,5e3,10e3,50e3,100e3])
-  .range(brewer);
-
-  scales.logPopulation = d3.scale.threshold()
-  .domain([10,50,100,500,1e3,5e3,10e3,50e3,100e3,1e6])
-  .range(brewer);
-
-  scales.logTotalPopDensity = d3.scale.threshold()
-  .domain([0.01,1,5,10,25,50,100,500,1e3,50e3])
-  .range(brewer);
-
-  scales.slavePopDensity = d3.scale.threshold()
-  .domain([0.01,0.5,1,5,10,20,30,40,50,200])
-  .range(brewer);
-
-  scales.percentageSlave = d3.scale.threshold()
-  .domain([0.1,10,20,30,40,50,60,70,80,100])
-  .range(brewer);
-
-  current_scale = scales.logSlaves;
-
   draw_coast();
 
+  date_label.text(current.year + " Census");
   var_label.text("Slave population");
 
-  update_legend(scales.logSlaves, "YlOrRd");
+  update_legend(maps.slavePopulation);
 
   slider
   .call(brush.event)
   .call(brush.extent([1790, 1790]))
   .call(brush.event);
+
+  draw_map(current.year, maps[current.map]);
 
   drawRivers();
 
@@ -268,6 +283,7 @@ function percent(x) {
 
 function brushed() {
   var value = brush.extent()[0];
+  console.log(value);
 
   if (d3.event.sourceEvent) { // not a programmatic event
     value = x.invert(d3.mouse(this)[0]);
@@ -280,23 +296,24 @@ function brushed() {
 
 
   // Only redraw the map when we cross the threshold to a new year
-  if (current_date !== already_drawn) {
+  if (current_date !== current.year) {
     date_label.text(current_date + " Census");
 
-    draw_map(current_date, current_variable, current_scale);
+    draw_map(current_date, maps[current.map]);
 
-    already_drawn = current_date;
+    current.year = current_date;
 
   }
 
 }
 
-function draw_map(date, variable, scale) {
+function draw_map(date, map) {
 
-  var us_cur  = data["us_" + date],
-      cur     = "county_" + date;
+  console.log(map);
+  svg.attr("class", map.color);
 
-  var counties = topojson.feature(us_cur, us_cur.objects[cur]);
+  var counties = topojson.feature(data["us_" + date],
+                                  data["us_" + date].objects["county_" + date]);
 
   svg.selectAll(".counties, .states, .country").remove();
 
@@ -306,21 +323,15 @@ function draw_map(date, variable, scale) {
   .enter()
   .append("path")
   .attr("class", function(d) {
-      return scale(d.properties[variable]);
+      return map.scale(d.properties[map.field]);
     })
   .classed("counties", true)
   .attr("id", function(d) { return d.id; })
   .attr("d", path)
   .on("click", clicked)
   .on("mousemove", function(d, i) {
-    // var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
-    // var offset = d3.select("#viz")[0][0].offsetLeft;
 
     var mouse = d3.mouse(d3.select("body").node());
-    
-    // console.log("mouse: " + mouse[0] + "; offset: " + offset);
-    // console.log(mouse_body);
-
 
     tooltip
     .classed("hidden", false)
@@ -333,14 +344,21 @@ function draw_map(date, variable, scale) {
 
   svg
   .append("path")
-  .datum(topojson.mesh(us_cur, us_cur.objects[cur], function(a, b) { return a.properties.state !== b.properties.state; }))
-  .attr("class", "decade-" + current_date)
-  .classed("states", true) 
-  .attr("d", path);
+  .datum(topojson.mesh(data["us_" + date], data["us_" + 
+                       date].objects["county_" + date],
+                        function(a, b) { 
+                          return a.properties.state !== b.properties.state; 
+                        }))
+  .attr("class", "decade-" + current.year)
+  .classed("states", true) .attr("d", path);
 
   svg.append("path")
-  .datum(topojson.mesh(us_cur, us_cur.objects[cur], function(a, b) { return a === b; }))
-  .attr("class", "decade-" + current_date)
+  .datum(topojson.mesh(data["us_" + date], data["us_" + 
+                       date].objects["county_" + date],
+                        function(a, b) { 
+                          return a === b; 
+                        }))
+  .attr("class", "decade-" + current.year)
   .classed("country", true) 
   .attr("d", path);
 
@@ -394,40 +412,35 @@ function variable_selected() {
   var_label.text(variable);
 
   if (variable === "Slave population") {
-    svg.attr("class", "YlOrRd");
-    draw_map(current_date, "pop_slave", scales.logSlaves);
-    update_legend(scales.logSlaves, "YlOrRd");
-    current_variable = "pop_slave";
-    current_scale = scales.logSlaves;
+    draw_map(current.year, maps.slavePopulation);
+    update_legend(maps.slavePopulation);
+    // current_variable = "pop_slave";
+    // current_scale = scales.logSlaves;
   } else if (variable === "Total population") {
-    svg.attr("class", "YlGnBu");
-    draw_map(current_date, "pop_total", scales.logPopulation);
-    update_legend(scales.logPopulation, "YlGnBu");
-    current_variable = "pop_total";
-    current_scale = scales.logPopulation;
+    draw_map(current.year, maps.totalPopulation);
+    update_legend(maps.totalPopulation);
+    // current_variable = "pop_total";
+    // current_scale = scales.logPopulation;
   } else if (variable === "Enslaved persons per mile²") {
-    svg.attr("class", "YlOrRd");
-    draw_map(current_date, "slaves_per_mile", scales.slavePopDensity);
-    update_legend(scales.slavePopDensity, "YlOrRd");
-    current_variable = "slaves_per_mile";
-    current_scale = scales.slavePopDensity;
+    draw_map(current.year, maps.slaveDensity);
+    update_legend(maps.slaveDensity);
+    // current_variable = "slaves_per_mile";
+    // current_scale = scales.slavePopDensity;
   } else if (variable === "Total persons per mile²") {
-    svg.attr("class", "YlGnBu");
-    draw_map(current_date, "total_per_mile", scales.logTotalPopDensity);
-    update_legend(scales.logTotalPopDensity, "YlGnBu");
-    current_variable = "total_per_mile";
-    current_scale = scales.logTotalPopDensity;
+    draw_map(current.year, maps.totalDensity);
+    update_legend(maps.totalDensity);
+    // current_variable = "total_per_mile";
+    // current_scale = scales.logTotalPopDensity;
   } else if (variable === "Percentage population enslaved") {
-    svg.attr("class", "YlOrRd");
-    draw_map(current_date, "percentage_enslaved", scales.percentageSlave);
-    update_legend(scales.percentageSlave, "YlOrRd");
-    current_variable = "percentage_enslaved";
-    current_scale = scales.percentageSlave;
+    draw_map(current.year, maps.slavePercentage);
+    update_legend(maps.totalDensity);
+    // current_variable = "percentage_enslaved";
+    // current_scale = scales.percentageSlave;
   }
   
 }
 
-function update_legend(scale, colors) {
+function update_legend(map) {
 
   legend_colors.selectAll("circle, text").remove();
 
@@ -437,14 +450,13 @@ function update_legend(scale, colors) {
       .attr("cx", 0)
       .attr("cy", i * 20)
       .attr("r", 7)
-      .attr("class", colors + " q" + i + "-9");
+      .attr("class", map.color + " q" + i + "-9");
 
     legend_colors
       .append("text")
       .attr("x", 12)
       .attr("y", i * 20 + 5)
-      .text(scale.invertExtent("q" + i + "-9")[0].toLocaleString() + " - " +
-             scale.invertExtent("q" + i + "-9")[1].toLocaleString() );
+      .text(map.scale.invertExtent("q" + i + "-9")[0].toLocaleString() + " - " + map.scale.invertExtent("q" + i + "-9")[1].toLocaleString() );
   }
 
 }
