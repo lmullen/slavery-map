@@ -172,6 +172,16 @@ function ready(error, coast, rivers, us_1790, us_1800, us_1810, us_1820,
   data.us_1850 = us_1850;
   data.us_1860 = us_1860;
 
+  // Calculate derivative properties
+  for(var i = 1790; i <= 1860; i += 10) {
+    // console.log(data["us_" + i].objects);
+    data["us_" + i].objects["county_" + i].geometries.forEach(function(d) {
+      d.properties.percentage_enslaved = 100 * d.properties.pop_slave / d.properties.pop_total;
+      d.properties.slaves_per_mile = d.properties.pop_slave / sqMetersToSqMiles(d.properties.area);
+      d.properties.total_per_mile = d.properties.pop_total / sqMetersToSqMiles(d.properties.area);
+    });
+  }
+
   // make scales
 
   var brewer = ["", "q0-9", "q1-9", "q2-9", "q3-9", "q4-9", "q5-9", "q6-9", "q7-9", "q8-9"];
@@ -295,15 +305,8 @@ function draw_map(date, variable, scale) {
   .enter()
   .append("path")
   .attr("class", function(d) {
-    if (variable === "slaves_per_mile") {
-      return scale(d.properties.pop_slave / sqMetersToSqMiles(d.properties.area));
-    } else if (variable === "percentage_enslaved") {
-      return scale(100 * d.properties.pop_slave / d.properties.pop_total);
-    } else if (variable === "total_per_mile") {
-      return scale(d.properties.pop_total / sqMetersToSqMiles(d.properties.area));
-    } else {
       return scale(d.properties[variable]);
-    }})
+    })
   .classed("counties", true)
   .attr("id", function(d) { return d.id; })
   .attr("d", path)
