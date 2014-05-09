@@ -174,13 +174,15 @@ function ready(error, coast, rivers, us_1790, us_1800, us_1810, us_1820,
 
   // make scales
 
+  var brewer = ["", "q0-9", "q1-9", "q2-9", "q3-9", "q4-9", "q5-9", "q6-9", "q7-9", "q8-9"];
+
   scales.logSlaves = d3.scale.threshold()
   .domain([1,10,50,100,500,1e3,5e3,10e3,50e3,100e3])
-  .range(["", "q0-9", "q1-9", "q2-9", "q3-9", "q4-9", "q5-9", "q6-9", "q7-9", "q8-9"]);
+  .range(brewer);
 
-  scales.logPopulation = d3.scale.log()
-  .domain([1, 813669])
-  .rangeRound([0,8]);
+  scales.logPopulation = d3.scale.threshold()
+  .domain([10,50,100,500,1e3,5e3,10e3,50e3,100e3,1e6])
+  .range(brewer);
 
   scales.logTotalPopDensity = d3.scale.log()
   .domain([0.01, 35441])
