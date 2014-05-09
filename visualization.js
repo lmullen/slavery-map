@@ -73,7 +73,7 @@ var var_label = legend
 var legend_colors = legend
 .append("g")
 .attr("class","legend-colors")
-.attr("transform", "translate(10,20)");
+.attr("transform", "translate(10,50)");
 
 // var quantize = d3.scale.quantize()
 // .domain([1, 37290])
@@ -169,60 +169,25 @@ function ready(error, coast, rivers, us_1790, us_1800, us_1810, us_1820,
   data.us_1860 = us_1860;
 
   // make scales
-  myData = [];
-  for(i = 1790; i <= 1860; i = i +10) {
-    myData.push(topojson.feature(data["us_" + i], data["us_" + i].objects["county_" + i]).features);
-  }
-  var myDataFlattened = d3.merge(myData);
 
-  var maxTotalPopulation = d3.max(myDataFlattened, function(d) {
-    return d.properties.pop_total;
-  });
-
-  var maxSlavePopulation = d3.max(myDataFlattened, function(d) {
-    return d.properties.pop_slave;
-  });
-
-  var maxTotalPopDensity = d3.max(myDataFlattened, function(d) {
-    return d.properties.pop_total / sqMetersToSqMiles(d.properties.area);
-  });
-
-  var maxSlavePopDensity = d3.max(myDataFlattened, function(d) {
-    return d.properties.pop_slave / sqMetersToSqMiles(d.properties.area);
-  });
-
-  var maxPercentageSlave = d3.max(myDataFlattened, function(d) {
-    return 100 * d.properties.pop_slave / d.properties.pop_total;
-  });
-
-  var percentageSlave = myDataFlattened.map( function(d) {
-    return 100 * d.properties.pop_slave / d.properties.pop_total;
-  });
-
-  console.log(maxPercentageSlave);
-
-  scales.jenksPopulation = d3.scale.threshold()
-  .domain([1242,3122,5530,8785,13338,20914,37290,61903])
-  .range(d3.range(8).map(function(i) { return "q" + (i + 1) + "-9"; }));
-
-  scales.logSlaves = d3.scale.log()
-  .domain([1, maxSlavePopulation])
-  .rangeRound([0,8]);
+  scales.logSlaves = d3.scale.threshold()
+  .domain([1,10,50,100,500,1e3,5e3,10e3,50e3,100e3])
+  .range(["", "q0-9", "q1-9", "q2-9", "q3-9", "q4-9", "q5-9", "q6-9", "q7-9", "q8-9"]);
 
   scales.logPopulation = d3.scale.log()
-  .domain([1, maxTotalPopulation])
+  .domain([1, 813669])
   .rangeRound([0,8]);
 
   scales.logTotalPopDensity = d3.scale.log()
-  .domain([0.01, maxTotalPopDensity])
+  .domain([0.01, 35441])
   .rangeRound([0,8]);
 
   scales.slavePopDensity = d3.scale.log()
-  .domain([0.01, maxSlavePopDensity])
+  .domain([0.01, 1416])
   .rangeRound([0,8]);
 
   scales.percentageSlave = d3.scale.sqrt()
-  .domain([0.01, maxPercentageSlave])
+  .domain([0.01, 93.5])
   .rangeRound([0,8]);
 
   current_scale = scales.logSlaves;
@@ -349,13 +314,8 @@ function draw_map(date, variable, scale) {
         return "q" + scale(d.properties.pop_total / sqMetersToSqMiles(d.properties.area)) + "-9";
       }
     } else {
-      if (d.properties[variable] === 0) { 
-        return "";
-      } else if (typeof d.properties[variable] === "undefined") {
-        return "";
-      } else {
-        return "q" + scale(d.properties[variable]) + "-9";
-    }}})
+        return scale(d.properties[variable]);
+    }})
   .classed("counties", true)
   .attr("id", function(d) { return d.id; })
   .attr("d", path)
@@ -479,7 +439,7 @@ function update_legend(scale, colors) {
 
   legend_colors.selectAll("circle, text").remove();
 
-  for(i = 1; i <= 8; i++) {
+  for(i = 0; i <= 8; i++) {
     legend_colors
       .append("circle")
       .attr("cx", 0)
@@ -491,7 +451,8 @@ function update_legend(scale, colors) {
       .append("text")
       .attr("x", 12)
       .attr("y", i * 20 + 5)
-      .text("≤ " + (d3.round(scale.invert(i))).toLocaleString());
+      .text(scale.invertExtent("q" + i + "-9")[0].toLocaleString() + " - " +
+             scale.invertExtent("q" + i + "-9")[1].toLocaleString() );
   }
 
 }
@@ -533,7 +494,7 @@ function zoomed() {
   svg.selectAll(".coast").style("stroke-width", 1.25 / d3.event.scale + "px");
   svg.selectAll(".country").style("stroke-width", 1.0 / d3.event.scale + "px");
   svg.selectAll(".states").style("stroke-width", 0.5 / d3.event.scale + "px");
-  svg.selectAll(".counties").style("stroke-width", 0.25 / d3.event.scale + "px");
+  // svg.selectAll(".counties").style("stroke-width", 0.25 / d3.event.scale + "px");
   svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
 
