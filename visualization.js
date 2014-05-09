@@ -500,7 +500,7 @@ function zoomed() {
   svg.selectAll(".coast").style("stroke-width", 1.25 / d3.event.scale + "px");
   svg.selectAll(".country").style("stroke-width", 1.0 / d3.event.scale + "px");
   svg.selectAll(".states").style("stroke-width", 0.5 / d3.event.scale + "px");
-  // svg.selectAll(".counties").style("stroke-width", 0.25 / d3.event.scale + "px");
+  svg.selectAll(".counties").style("stroke-width", 0.25 / d3.event.scale + "px");
   svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
 
