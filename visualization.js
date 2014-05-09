@@ -11,10 +11,9 @@ queue()
 .defer(d3.json, "us_1860.json")
 .await(ready);
 
-var margin = {top: 10, right: 10, bottom: 10, left: 10};
-var width = 960 - margin.left - margin.right,
-height = 500 - margin.top - margin.bottom;
-var active = d3.select(null);
+var margin = {top: 10, right: 10, bottom: 10, left: 10},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
 var svg = d3.select("#viz").append("svg")
 .attr("width", width + margin.left + margin.right)
@@ -29,6 +28,8 @@ var loading = svg.append("text")
 .attr("x", width / 2)
 .attr("y", height / 2)
 .text("Loading the map ...");
+
+var active = d3.select(null);
 
 var slider_height = 20,
     slider_width = 600;
