@@ -15,7 +15,7 @@ us_1790.json: $(shapefiles)/county_1790.shp
 		-p state=STATENAM \
 		-p area=+SHAPE_AREA \
 		-p whitePopulation=+AAQ003 \
-		-p freeBlackPopulation=+AAQ001 \
+		-p freeAfAmPopulation=+AAQ001 \
 		-p slavePopulation=+AAQ002 \
 		-p slavesPerSlaveholder=+AAJ001 \
 		-p slaveholders='+AAE001 + +AAE002' \
@@ -33,7 +33,7 @@ us_1800.json: $(shapefiles)/county_1800.shp
 		-p county=NHGISNAM \
 		-p state=STATENAM \
 		-p area=+SHAPE_AREA \
-		-p freeBlackPopulation=+AAY001 \
+		-p freeAfAmPopulation=+AAY001 \
 		-p slavePopulation=+AAY002 \
 		-e data/nhgis0014_ts_county.csv \
 		-p totalPopulation=+A00AA1800 \
@@ -50,7 +50,7 @@ us_1810.json: $(shapefiles)/county_1810.shp
 		-p county=NHGISNAM \
 		-p state=STATENAM \
 		-p area=+SHAPE_AREA \
-		-p freeBlackPopulation=+AA7001 \
+		-p freeAfAmPopulation=+AA7001 \
 		-p slavePopulation=+AA7002 \
 		-e data/nhgis0014_ts_county.csv \
 		-p totalPopulation=+A00AA1810 \
@@ -66,7 +66,7 @@ us_1820.json: $(shapefiles)/county_1820.shp
 		-p county=NHGISNAM \
 		-p state=STATENAM \
 		-p area=+SHAPE_AREA \
-		-p freeBlackPopulation='+ABB005 + +ABB006' \
+		-p freeAfAmPopulation='+ABB005 + +ABB006' \
 		-p slavePopulation='+ABB003 + +ABB004' \
 		-p whitePopulation='+ABB001 + +ABB002' \
 		-e data/nhgis0014_ts_county.csv \
@@ -83,7 +83,7 @@ us_1830.json: $(shapefiles)/county_1830.shp
 		-p county=NHGISNAM \
 		-p state=STATENAM \
 		-p area=+SHAPE_AREA \
-		-p freeBlackPopulation='+ABO005 + +ABO006' \
+		-p freeAfAmPopulation='+ABO005 + +ABO006' \
 		-p slavePopulation='+ABO003 + +ABO004' \
 		-p whitePopulation='+ABO001 + +ABO002' \
 		-e data/nhgis0014_ts_county.csv \
@@ -100,7 +100,7 @@ us_1840.json: $(shapefiles)/county_1840.shp
 		-p state=STATENAM \
 		-p area=+SHAPE_AREA \
 		-p whitePopulation=+ACS001 \
-		-p freeBlackPopulation=+ACS002 \
+		-p freeAfAmPopulation=+ACS002 \
 		-p slavePopulation=+ACS003 \
 		-e data/nhgis0014_ts_county.csv \
 		-p totalPopulation=+A00AA1840 \
@@ -116,7 +116,7 @@ us_1850.json: $(shapefiles)/county_1850.shp
 		-p state=STATENAM \
 		-p area=+SHAPE_AREA \
 		-p whitePopulation=+AE6001 \
-		-p freeBlackPopulation=+AE6002 \
+		-p freeAfAmPopulation=+AE6002 \
 		-p slavePopulation=+AE6003 \
 		-e data/nhgis0014_ts_county.csv \
 		-p totalPopulation=+A00AA1850 \
@@ -131,7 +131,7 @@ us_1860.json: $(shapefiles)/county_1860.shp
 		-p county=NHGISNAM \
 		-p state=STATENAM \
 		-p area=+SHAPE_AREA \
-		-p freeBlackPopulation='+AH2003 + +AH2004' \
+		-p freeAfAmPopulation='+AH2003 + +AH2004' \
 		-p slavePopulation='+AH2005 + +AH2006' \
 		-e data/nhgis0014_ts_county.csv \
 		-p totalPopulation=+A00AA1860 \

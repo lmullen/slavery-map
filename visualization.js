@@ -33,9 +33,9 @@ var maps = {
             .domain([1,10,33,100,333,1e3,3.33e3,10e3,33.3e3,100e3])
             .range(brewer)
   },
-  "freeBlackPopulation": {
-    "field": "freeBlackPopulation",
-    "label": "Free black population",
+  "freeAfAmPopulation": {
+    "field": "freeAfAmPopulation",
+    "label": "Free African American population",
     "color": "YlGn",
     "scale": d3.scale.threshold()
             .domain([1,10,33,100,333,1e3,3.33e3,10e3,33.3e3,100e3])
@@ -73,9 +73,9 @@ var maps = {
             .domain([0.01,0.5,1,5,10,20,30,40,50,200])
             .range(brewer)
   },
-  "freeBlackDensity": {
-    "field": "freeBlackDensity",
-    "label": "Free black persons/mile²",
+  "freeAfAmDensity": {
+    "field": "freeAfAmDensity",
+    "label": "Free African Americans/mile²",
     "color": "YlGn",
     "scale": d3.scale.threshold()
             .domain([0.01,0.5,1,5,10,20,30,40,50,200])
@@ -105,9 +105,9 @@ var maps = {
             .domain([0.1,10,20,30,40,50,60,70,80,100])
             .range(brewer)
   },
-  "freeBlackPercentage": {
-    "field": "freeBlackPercentage",
-    "label": "Percentage free blacks",
+  "freeAfAmPercentage": {
+    "field": "freeAfAmPercentage",
+    "label": "Percentage free African Americans",
     "color": "YlGn",
     "scale": d3.scale.threshold()
             .domain([0.01,0.033,0.10,0.33,1.00,3.33,6.66,10,20,40])
@@ -257,6 +257,12 @@ var tooltip = d3.select("body").append("div")
 function ready(error, coast, us_1790, us_1800, us_1810, us_1820,
                us_1830, us_1840, us_1850, us_1860) { 
 
+  if (error) {
+    loading.text("Sorry, there has been an error. " +
+                 "Please refresh and try again.");
+    console.log(error);
+  }
+
   data.coast   = coast;
   data.us_1790 = us_1790;
   data.us_1800 = us_1800;
@@ -271,10 +277,10 @@ function ready(error, coast, us_1790, us_1800, us_1810, us_1820,
   for(var i = 1790; i <= 1860; i += 10) {
     data["us_" + i].objects.county.geometries.forEach(function(d) {
       d.properties.slavePercentage = 100 * d.properties.slavePopulation / d.properties.totalPopulation;
-      d.properties.freeBlackPercentage = 100 * d.properties.freeBlackPopulation / d.properties.totalPopulation;
+      d.properties.freeAfAmPercentage = 100 * d.properties.freeAfAmPopulation / d.properties.totalPopulation;
       d.properties.whitePercentage = 100 * d.properties.whitePopulation / d.properties.totalPopulation;
       d.properties.slaveDensity = d.properties.slavePopulation / sqMToSqMi(d.properties.area);
-      d.properties.freeBlackDensity = d.properties.freeBlackPopulation / sqMToSqMi(d.properties.area);
+      d.properties.freeAfAmDensity = d.properties.freeAfAmPopulation / sqMToSqMi(d.properties.area);
       d.properties.whiteDensity = d.properties.whitePopulation / sqMToSqMi(d.properties.area);
       d.properties.totalDensity = d.properties.totalPopulation / sqMToSqMi(d.properties.area);
     });
@@ -294,17 +300,17 @@ function ready(error, coast, us_1790, us_1800, us_1810, us_1820,
 
 function tooltipText(d) {
   var sPop   = d.properties.slavePopulation || "",
-      fbPop  = d.properties.freeBlackPopulation || "",
+      fbPop  = d.properties.freeAfAmPopulation || "",
       wPop   = d.properties.whitePopulation || "",
       hPop   = d.properties.slaveholders || "",
       sPh    = densityFormat(d.properties.slavesPerSlaveholder) || "",
       sPerc  = percentageFormat(d.properties.slavePercentage / 100) || "",
-      fbPerc = percentageFormat(d.properties.freeBlackPercentage / 100) || "",
+      fbPerc = percentageFormat(d.properties.freeAfAmPercentage / 100) || "",
       wPerc  = percentageFormat(d.properties.whitePercentage / 100) || "",
       hPerc  = percentageFormat(d.properties.slaveholdersPercentage / 100) || "",
       tPop   = d.properties.totalPopulation || "",
       sDen   = d.properties.slaveDensity === 0 ? "N/A" : densityFormat(d.properties.slaveDensity),
-      fbDen  = d.properties.freeBlackDensity === 0 ? "N/A" : densityFormat(d.properties.freeBlackDensity),
+      fbDen  = d.properties.freeAfAmDensity === 0 ? "N/A" : densityFormat(d.properties.freeAfAmDensity),
       wDen   = d.properties.whiteDensity === 0 ? "N/A" : densityFormat(d.properties.whiteDensity),
       tDen   = densityFormat(d.properties.totalDensity) || "";
 
@@ -315,7 +321,7 @@ function tooltipText(d) {
    "<td>" + sPop.toLocaleString() + "</td>" +
    "<td style='width:65px;'>" + sPerc + "</td>" +
    "</tr><tr>"+
-   "<td class='field'>Free black population: </td>" +
+   "<td class='field'>Free African American population: </td>" +
    "<td>" + fbPop.toLocaleString() + "</td>" +
    "<td style='width:65px;'>" + fbPerc + "</td>" +
    "</tr><tr>"+
@@ -330,7 +336,7 @@ function tooltipText(d) {
    "<td class='field table-break'>Enslaved persons/mile²: </td>" +
    "<td class='table-break'>" + sDen + "</td>" +
    "</tr><tr>"+
-   "<td class='field'>Free black persons/mile²: </td>" +
+   "<td class='field'>Free African Americans/mile²: </td>" +
    "<td>" + fbDen + "</td>" +
    "</tr><tr>"+
    "<td class='field'>White persons/mile²: </td>" +
