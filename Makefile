@@ -55,7 +55,6 @@ us_1810.json: $(shapefiles)/county_1810.shp
 		-p totalPopulation=+A00AA1810 \
 		-- county=$< 
 
-# All these are for men and not women, though women are in other fields
 us_1820.json: $(shapefiles)/county_1820.shp
 	topojson -o $@ \
 		-q 1e4 -s 0.2 \
@@ -65,9 +64,9 @@ us_1820.json: $(shapefiles)/county_1820.shp
 		-p county=NHGISNAM \
 		-p state=STATENAM \
 		-p area=+SHAPE_AREA \
-		-p freeBlackPopulation=+ABB005 \
-		-p slavePopulation=+ABB003 \
-		-p whitePopulation=+ABB001 \
+		-p freeBlackPopulation='+ABB005 + +ABB006' \
+		-p slavePopulation='+ABB003 + +ABB004' \
+		-p whitePopulation='+ABB001 + +ABB002' \
 		-e data/nhgis0014_ts_county.csv \
 		-p totalPopulation=+A00AA1820 \
 		-- county=$< 
