@@ -1,0 +1,356 @@
+--------------------------------------------------------------------------------
+Codebook for NHGIS data file 'nhgis0016_ds14_1860_county'
+--------------------------------------------------------------------------------
+ 
+Contents
+    - Data Summary
+    - Data Dictionary
+    - Citation and Use
+ 
+Additional documentation on NHGIS data sources is available at: 
+    https://www.nhgis.org/documentation/tabular-data 
+ 
+--------------------------------------------------------------------------------
+Data Summary
+--------------------------------------------------------------------------------
+ 
+Year:             1860
+Geographic level: County (by State)
+Dataset:          1860 Census: Population, Agriculture & Other Data [US, States & Counties]
+   NHGIS code:    1860_cPAX
+   NHGIS ID:      ds14
+ 
+Tables:
+ 
+1. Total Population
+   Universe:    Persons
+   Source code: NT1
+   NHGIS code:  AG3
+ 
+2. Race by Age by Sex
+   Universe:    Persons
+   Source code: NT4
+   NHGIS code:  AH0
+ 
+3. Race by Sex
+   Universe:    Persons
+   Source code: NT5
+   NHGIS code:  AH2
+ 
+4. Slave Holders by Number of Slaves
+   Universe:    Slaveholders
+   Source code: NT14
+   NHGIS code:  AG9
+ 
+5. Total Slave Holders
+   Universe:    Slaveholders
+   Source code: NT15
+   NHGIS code:  AHA
+ 
+6. Slave Status
+   Universe:    Persons
+   Source code: NT16
+   NHGIS code:  AHB
+ 
+--------------------------------------------------------------------------------
+Data Dictionary
+--------------------------------------------------------------------------------
+ 
+Context Fields 
+    GISJOIN:     GIS Join Match Code
+    YEAR:        Data File Year
+    STATE:       State Name
+    STATEA:      State Code
+    COUNTY:      County Name
+    COUNTYA:     County Code
+    AREANAME:    Area name
+ 
+Table 1:     Total Population
+Universe:    Persons
+Source code: NT1
+NHGIS code:  AG3
+    AG3001:      Total
+ 
+Table 2:     Race by Age by Sex
+Universe:    Persons
+Source code: NT4
+NHGIS code:  AH0
+    AH0001:      White >> Under 1 year of age >> Male
+    AH0002:      White >> Under 1 year of age >> Female
+    AH0003:      White >> 1 to 4 years of age >> Male
+    AH0004:      White >> 1 to 4 years of age >> Female
+    AH0005:      White >> 5 to 9 years of age >> Male
+    AH0006:      White >> 5 to 9 years of age >> Female
+    AH0007:      White >> 10 to 14 years of age >> Male
+    AH0008:      White >> 10 to 14 years of age >> Female
+    AH0009:      White >> 15 to 19 years of age >> Male
+    AH0010:      White >> 15 to 19 years of age >> Female
+    AH0011:      White >> 20 to 29 years of age >> Male
+    AH0012:      White >> 20 to 29 years of age >> Female
+    AH0013:      White >> 30 to 39 years of age >> Male
+    AH0014:      White >> 30 to 39 years of age >> Female
+    AH0015:      White >> 40 to 49 years of age >> Male
+    AH0016:      White >> 40 to 49 years of age >> Female
+    AH0017:      White >> 50 to 59 years of age >> Male
+    AH0018:      White >> 50 to 59 years of age >> Female
+    AH0019:      White >> 60 to 69 years of age >> Male
+    AH0020:      White >> 60 to 69 years of age >> Female
+    AH0021:      White >> 70 to 79 years of age >> Male
+    AH0022:      White >> 70 to 79 years of age >> Female
+    AH0023:      White >> 80 to 89 years of age >> Male
+    AH0024:      White >> 80 to 89 years of age >> Female
+    AH0025:      White >> 90 to 99 years of age >> Male
+    AH0026:      White >> 90 to 99 years of age >> Female
+    AH0027:      White >> 100 years of age and over >> Male
+    AH0028:      White >> 100 years of age and over >> Female
+    AH0029:      White >> Unknown >> Male
+    AH0030:      White >> Unknown >> Female
+    AH0031:      Free colored >> Under 1 year of age >> Male
+    AH0032:      Free colored >> Under 1 year of age >> Female
+    AH0033:      Free colored >> 1 to 4 years of age >> Male
+    AH0034:      Free colored >> 1 to 4 years of age >> Female
+    AH0035:      Free colored >> 5 to 9 years of age >> Male
+    AH0036:      Free colored >> 5 to 9 years of age >> Female
+    AH0037:      Free colored >> 10 to 14 years of age >> Male
+    AH0038:      Free colored >> 10 to 14 years of age >> Female
+    AH0039:      Free colored >> 15 to 19 years of age >> Male
+    AH0040:      Free colored >> 15 to 19 years of age >> Female
+    AH0041:      Free colored >> 20 to 29 years of age >> Male
+    AH0042:      Free colored >> 20 to 29 years of age >> Female
+    AH0043:      Free colored >> 30 to 39 years of age >> Male
+    AH0044:      Free colored >> 30 to 39 years of age >> Female
+    AH0045:      Free colored >> 40 to 49 years of age >> Male
+    AH0046:      Free colored >> 40 to 49 years of age >> Female
+    AH0047:      Free colored >> 50 to 59 years of age >> Male
+    AH0048:      Free colored >> 50 to 59 years of age >> Female
+    AH0049:      Free colored >> 60 to 69 years of age >> Male
+    AH0050:      Free colored >> 60 to 69 years of age >> Female
+    AH0051:      Free colored >> 70 to 79 years of age >> Male
+    AH0052:      Free colored >> 70 to 79 years of age >> Female
+    AH0053:      Free colored >> 80 to 89 years of age >> Male
+    AH0054:      Free colored >> 80 to 89 years of age >> Female
+    AH0055:      Free colored >> 90 to 99 years of age >> Male
+    AH0056:      Free colored >> 90 to 99 years of age >> Female
+    AH0057:      Free colored >> 100 years of age and over >> Male
+    AH0058:      Free colored >> 100 years of age and over >> Female
+    AH0059:      Free colored >> Unknown >> Male
+    AH0060:      Free colored >> Unknown >> Female
+    AH0061:      Slave >> Under 1 year of age >> Male
+    AH0062:      Slave >> Under 1 year of age >> Female
+    AH0063:      Slave >> 1 to 4 years of age >> Male
+    AH0064:      Slave >> 1 to 4 years of age >> Female
+    AH0065:      Slave >> 5 to 9 years of age >> Male
+    AH0066:      Slave >> 5 to 9 years of age >> Female
+    AH0067:      Slave >> 10 to 14 years of age >> Male
+    AH0068:      Slave >> 10 to 14 years of age >> Female
+    AH0069:      Slave >> 15 to 19 years of age >> Male
+    AH0070:      Slave >> 15 to 19 years of age >> Female
+    AH0071:      Slave >> 20 to 29 years of age >> Male
+    AH0072:      Slave >> 20 to 29 years of age >> Female
+    AH0073:      Slave >> 30 to 39 years of age >> Male
+    AH0074:      Slave >> 30 to 39 years of age >> Female
+    AH0075:      Slave >> 40 to 49 years of age >> Male
+    AH0076:      Slave >> 40 to 49 years of age >> Female
+    AH0077:      Slave >> 50 to 59 years of age >> Male
+    AH0078:      Slave >> 50 to 59 years of age >> Female
+    AH0079:      Slave >> 60 to 69 years of age >> Male
+    AH0080:      Slave >> 60 to 69 years of age >> Female
+    AH0081:      Slave >> 70 to 79 years of age >> Male
+    AH0082:      Slave >> 70 to 79 years of age >> Female
+    AH0083:      Slave >> 80 to 89 years of age >> Male
+    AH0084:      Slave >> 80 to 89 years of age >> Female
+    AH0085:      Slave >> 90 to 99 years of age >> Male
+    AH0086:      Slave >> 90 to 99 years of age >> Female
+    AH0087:      Slave >> 100 years of age and over >> Male
+    AH0088:      Slave >> 100 years of age and over >> Female
+    AH0089:      Slave >> Unknown >> Male
+    AH0090:      Slave >> Unknown >> Female
+    AH0091:      Indian >> Under 1 year of age >> Male
+    AH0092:      Indian >> Under 1 year of age >> Female
+    AH0093:      Indian >> 1 to 4 years of age >> Male
+    AH0094:      Indian >> 1 to 4 years of age >> Female
+    AH0095:      Indian >> 5 to 9 years of age >> Male
+    AH0096:      Indian >> 5 to 9 years of age >> Female
+    AH0097:      Indian >> 10 to 14 years of age >> Male
+    AH0098:      Indian >> 10 to 14 years of age >> Female
+    AH0099:      Indian >> 15 to 19 years of age >> Male
+    AH0100:      Indian >> 15 to 19 years of age >> Female
+    AH0101:      Indian >> 20 to 29 years of age >> Male
+    AH0102:      Indian >> 20 to 29 years of age >> Female
+    AH0103:      Indian >> 30 to 39 years of age >> Male
+    AH0104:      Indian >> 30 to 39 years of age >> Female
+    AH0105:      Indian >> 40 to 49 years of age >> Male
+    AH0106:      Indian >> 40 to 49 years of age >> Female
+    AH0107:      Indian >> 50 to 59 years of age >> Male
+    AH0108:      Indian >> 50 to 59 years of age >> Female
+    AH0109:      Indian >> 60 to 69 years of age >> Male
+    AH0110:      Indian >> 60 to 69 years of age >> Female
+    AH0111:      Indian >> 70 to 79 years of age >> Male
+    AH0112:      Indian >> 70 to 79 years of age >> Female
+    AH0113:      Indian >> 80 to 89 years of age >> Male
+    AH0114:      Indian >> 80 to 89 years of age >> Female
+    AH0115:      Indian >> 90 to 99 years of age >> Male
+    AH0116:      Indian >> 90 to 99 years of age >> Female
+    AH0117:      Indian >> 100 years of age and over >> Male
+    AH0118:      Indian >> 100 years of age and over >> Female
+    AH0119:      Indian >> Unknown >> Male
+    AH0120:      Indian >> Unknown >> Female
+    AH0121:      Half breed >> Under 1 year of age >> Male
+    AH0122:      Half breed >> Under 1 year of age >> Female
+    AH0123:      Half breed >> 1 to 4 years of age >> Male
+    AH0124:      Half breed >> 1 to 4 years of age >> Female
+    AH0125:      Half breed >> 5 to 9 years of age >> Male
+    AH0126:      Half breed >> 5 to 9 years of age >> Female
+    AH0127:      Half breed >> 10 to 14 years of age >> Male
+    AH0128:      Half breed >> 10 to 14 years of age >> Female
+    AH0129:      Half breed >> 15 to 19 years of age >> Male
+    AH0130:      Half breed >> 15 to 19 years of age >> Female
+    AH0131:      Half breed >> 20 to 29 years of age >> Male
+    AH0132:      Half breed >> 20 to 29 years of age >> Female
+    AH0133:      Half breed >> 30 to 39 years of age >> Male
+    AH0134:      Half breed >> 30 to 39 years of age >> Female
+    AH0135:      Half breed >> 40 to 49 years of age >> Male
+    AH0136:      Half breed >> 40 to 49 years of age >> Female
+    AH0137:      Half breed >> 50 to 59 years of age >> Male
+    AH0138:      Half breed >> 50 to 59 years of age >> Female
+    AH0139:      Half breed >> 60 to 69 years of age >> Male
+    AH0140:      Half breed >> 60 to 69 years of age >> Female
+    AH0141:      Half breed >> 70 to 79 years of age >> Male
+    AH0142:      Half breed >> 70 to 79 years of age >> Female
+    AH0143:      Half breed >> 80 to 89 years of age >> Male
+    AH0144:      Half breed >> 80 to 89 years of age >> Female
+    AH0145:      Half breed >> 90 to 99 years of age >> Male
+    AH0146:      Half breed >> 90 to 99 years of age >> Female
+    AH0147:      Half breed >> 100 years of age and over >> Male
+    AH0148:      Half breed >> 100 years of age and over >> Female
+    AH0149:      Half breed >> Unknown >> Male
+    AH0150:      Half breed >> Unknown >> Female
+    AH0151:      Asiatic >> Under 1 year of age >> Male
+    AH0152:      Asiatic >> Under 1 year of age >> Female
+    AH0153:      Asiatic >> 1 to 4 years of age >> Male
+    AH0154:      Asiatic >> 1 to 4 years of age >> Female
+    AH0155:      Asiatic >> 5 to 9 years of age >> Male
+    AH0156:      Asiatic >> 5 to 9 years of age >> Female
+    AH0157:      Asiatic >> 10 to 14 years of age >> Male
+    AH0158:      Asiatic >> 10 to 14 years of age >> Female
+    AH0159:      Asiatic >> 15 to 19 years of age >> Male
+    AH0160:      Asiatic >> 15 to 19 years of age >> Female
+    AH0161:      Asiatic >> 20 to 29 years of age >> Male
+    AH0162:      Asiatic >> 20 to 29 years of age >> Female
+    AH0163:      Asiatic >> 30 to 39 years of age >> Male
+    AH0164:      Asiatic >> 30 to 39 years of age >> Female
+    AH0165:      Asiatic >> 40 to 49 years of age >> Male
+    AH0166:      Asiatic >> 40 to 49 years of age >> Female
+    AH0167:      Asiatic >> 50 to 59 years of age >> Male
+    AH0168:      Asiatic >> 50 to 59 years of age >> Female
+    AH0169:      Asiatic >> 60 to 69 years of age >> Male
+    AH0170:      Asiatic >> 60 to 69 years of age >> Female
+    AH0171:      Asiatic >> 70 to 79 years of age >> Male
+    AH0172:      Asiatic >> 70 to 79 years of age >> Female
+    AH0173:      Asiatic >> 80 to 89 years of age >> Male
+    AH0174:      Asiatic >> 80 to 89 years of age >> Female
+    AH0175:      Asiatic >> 90 to 99 years of age >> Male
+    AH0176:      Asiatic >> 90 to 99 years of age >> Female
+    AH0177:      Asiatic >> 100 years of age and over >> Male
+    AH0178:      Asiatic >> 100 years of age and over >> Female
+    AH0179:      Asiatic >> Unknown >> Male
+    AH0180:      Asiatic >> Unknown >> Female
+ 
+Table 3:     Race by Sex
+Universe:    Persons
+Source code: NT5
+NHGIS code:  AH2
+    AH2001:      White >> Male
+    AH2002:      White >> Female
+    AH2003:      Free colored >> Male
+    AH2004:      Free colored >> Female
+    AH2005:      Slave >> Male
+    AH2006:      Slave >> Female
+    AH2007:      Indian >> Male
+    AH2008:      Indian >> Female
+    AH2009:      Half breed >> Male
+    AH2010:      Half breed >> Female
+    AH2011:      Asiatic >> Male
+    AH2012:      Asiatic >> Female
+ 
+Table 4:     Slave Holders by Number of Slaves
+Universe:    Slaveholders
+Source code: NT14
+NHGIS code:  AG9
+    AG9001:      1 slave
+    AG9002:      2 slaves
+    AG9003:      3 slaves
+    AG9004:      4 slaves
+    AG9005:      5 slaves
+    AG9006:      6 slaves
+    AG9007:      7 slaves
+    AG9008:      8 slaves
+    AG9009:      9 slaves
+    AG9010:      10 to 14 slaves
+    AG9011:      15 to 19 slaves
+    AG9012:      20 to 29 slaves
+    AG9013:      30 to 39 slaves
+    AG9014:      40 to 49 slaves
+    AG9015:      50 to 69 slaves
+    AG9016:      70 to 99 slaves
+    AG9017:      100 to 199 slaves
+    AG9018:      200 to 299 slaves
+    AG9019:      300 to 499 slaves
+    AG9020:      500 to 999 slaves
+    AG9021:      1000 slaves and over
+ 
+Table 5:     Total Slave Holders
+Universe:    Slaveholders
+Source code: NT15
+NHGIS code:  AHA
+    AHA001:      Total
+ 
+Table 6:     Slave Status
+Universe:    Persons
+Source code: NT16
+NHGIS code:  AHB
+    AHB001:      Slave
+    AHB002:      Free
+ 
+--------------------------------------------------------------------------------
+Citation and Use of NHGIS Data
+--------------------------------------------------------------------------------
+ 
+All persons are granted a limited license to use this documentation and the
+accompanying data, subject to the following conditions:
+
+* Publications and research reports employing NHGIS data (either tabular or GIS)
+  must cite it appropriately. The citation should include the following:
+
+    Minnesota Population Center. National Historical Geographic Information
+    System: Version 2.0. Minneapolis, MN: University of Minnesota 2011.
+
+* Publications and research reports employing school attendance areas data
+  (either tabular or GIS) must cite it appropriately. The citation should
+  include the following:
+
+    The College of William and Mary and the Minnesota Population Center.
+    School Attendance Boundary Information System (SABINS): Version 1.0.
+    Minneapolis, MN: University of Minnesota 2011.
+
+* If possible, citations should also include the URL for the NHGIS site:
+
+    https://www.nhgis.org/
+
+* If possible, citations involving school attendance areas should also include
+  the URL for the SABINS site:
+
+    http://www.sabinsdata.org/
+
+In addition, we request that users send us a copy of any publications, research
+reports, or educational material making use of the data or documentation.
+Printed matter should be sent to:
+
+    NHGIS
+    Minnesota Population Center
+    University of Minnesota
+    50 Willey Hall
+    225 19th Ave S
+    Minneapolis, MN 55455
+
+Send electronic material to: nhgis@umn.edu

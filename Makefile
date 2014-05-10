@@ -126,16 +126,16 @@ us_1860.json: $(shapefiles)/county_1860.shp
 	topojson -o $@ \
 		-q 1e4 -s 0.2 \
 		--projection 'd3.geo.albers().scale(1000).translate([423, 240])' \
-		-e data/nhgis0013_ds14_1860_county.csv \
+		-e data/nhgis0016_ds14_1860_county.csv \
 		--id-property GISJOIN \
 		-p county=NHGISNAM \
 		-p state=STATENAM \
 		-p area=+SHAPE_AREA \
-		-p pop_free=+AHB002 \
-		-p slavePopulation=+AHB001 \
-		-p slaveholders=+AHA001 \
+		-p freeBlackPopulation='+AH2003 + +AH2004' \
+		-p slavePopulation='+AH2005 + +AH2006' \
 		-e data/nhgis0014_ts_county.csv \
 		-p totalPopulation=+A00AA1860 \
+		-p whitePopulation='+A00A1860 - +AH2003 - +AH2004 - +AH2005 - +AH2006' \
 		-- county=$< 
 
 build/ne_50m_coastline.zip:
