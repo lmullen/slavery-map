@@ -37,6 +37,7 @@ us_1800.json: $(shapefiles)/county_1800.shp
 		-p slavePopulation=+AAY002 \
 		-e data/nhgis0014_ts_county.csv \
 		-p totalPopulation=+A00AA1800 \
+		-p whitePopulation='+A00AA1800 - +AAY001 - +AAY002' \
 		-- county=$< 
 
 # Free white population not present

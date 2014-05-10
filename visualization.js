@@ -280,8 +280,8 @@ function ready(error, coast, us_1790, us_1800, us_1810, us_1820,
     });
   }
 
-    data["us_" + 1790].objects.county.geometries.forEach(function(d) {
-      // console.log((d.properties.slavesPerSlaveholder));
+    data["us_" + 1800].objects.county.geometries.forEach(function(d) {
+      // console.log((d.properties.whitePopulation));
     });
 
   // Draw the map for the first time
