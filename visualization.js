@@ -118,7 +118,7 @@ var maps = {
     "label": "Percentage white",
     "color": "RdPu",
     "scale": d3.scale.threshold()
-            .domain([0,20,30,40,50,60,70,80,90,100.001])
+            .domain([0,30,40,50,60,70,80,90,95,100.001])
             .range(brewer)
   },
   "slaveholderPercentage": {
@@ -267,9 +267,6 @@ function ready(error, coast, us_1790, us_1800, us_1810, us_1820,
   data.us_1850 = us_1850;
   data.us_1860 = us_1860;
 
-    console.time("calcuate properties");
-    
-
   // Calculate derivative properties
   for(var i = 1790; i <= 1860; i += 10) {
     data["us_" + i].objects.county.geometries.forEach(function(d) {
@@ -283,13 +280,9 @@ function ready(error, coast, us_1790, us_1800, us_1810, us_1820,
     });
   }
 
-    console.timeEnd("calcuate properties");
-
     data["us_" + 1790].objects.county.geometries.forEach(function(d) {
-      console.log((d.properties.slaveholdersPercentage));
       // console.log((d.properties.slavesPerSlaveholder));
     });
-
 
   // Draw the map for the first time
   slider.call(brush.event).call(brush.extent([1790, 1790])).call(brush.event);
@@ -300,20 +293,20 @@ function ready(error, coast, us_1790, us_1800, us_1810, us_1820,
 }  
 
 function tooltipText(d) {
-  var sPop   = d.properties.slavePopulation,
-      fbPop  = d.properties.freeBlackPopulation,
-      wPop   = d.properties.whitePopulation,
-      hPop   = d.properties.slaveholders,
-      sPh    = densityFormat(d.properties.slavesPerSlaveholder),
-      sPerc  = percentageFormat(d.properties.slavePercentage / 100),
-      fbPerc = percentageFormat(d.properties.freeBlackPercentage / 100),
-      wPerc  = percentageFormat(d.properties.whitePercentage / 100),
-      hPerc  = percentageFormat(d.properties.slaveholdersPercentage / 100),
-      tPop   = d.properties.totalPopulation,
+  var sPop   = d.properties.slavePopulation || "",
+      fbPop  = d.properties.freeBlackPopulation || "",
+      wPop   = d.properties.whitePopulation || "",
+      hPop   = d.properties.slaveholders || "",
+      sPh    = densityFormat(d.properties.slavesPerSlaveholder) || "",
+      sPerc  = percentageFormat(d.properties.slavePercentage / 100) || "",
+      fbPerc = percentageFormat(d.properties.freeBlackPercentage / 100) || "",
+      wPerc  = percentageFormat(d.properties.whitePercentage / 100) || "",
+      hPerc  = percentageFormat(d.properties.slaveholdersPercentage / 100) || "",
+      tPop   = d.properties.totalPopulation || "",
       sDen   = d.properties.slaveDensity === 0 ? "N/A" : densityFormat(d.properties.slaveDensity),
       fbDen  = d.properties.freeBlackDensity === 0 ? "N/A" : densityFormat(d.properties.freeBlackDensity),
       wDen   = d.properties.whiteDensity === 0 ? "N/A" : densityFormat(d.properties.whiteDensity),
-      tDen   = densityFormat(d.properties.totalDensity) || "N/A";
+      tDen   = densityFormat(d.properties.totalDensity) || "";
 
  return "<h5>" + d.properties.county + ", " + d.properties.state + "</h5>" +
    "<table>" +
