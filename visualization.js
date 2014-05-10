@@ -323,8 +323,8 @@ function brushed() {
   // Only redraw the map when we cross the threshold to a new year
   if (brushDate !== current.year) {
     legendDate.text(brushDate + " Census");
-    drawMap(brushDate, current.map);
     current.year = brushDate;
+    drawMap(brushDate, current.map);
   }
 }
 
@@ -382,9 +382,8 @@ function drawMap(date, map) {
 
   svg.call(zoom.event);
 
-  updateLegend(map);
   current.map = map;
-
+  updateLegend(map);
 }
 
 function drawCoast() {
