@@ -96,6 +96,10 @@ tr {
   padding-left: 0;
 }
 
+.table-break {
+  padding-top: 15px!important;
+}
+
 .hidden {
   display: none;
   visibility: hidden;

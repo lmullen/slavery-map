@@ -19,7 +19,9 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
     active = d3.select(null),
     brewer = ["", "q0-9", "q1-9", "q2-9", "q3-9", "q4-9",
               "q5-9", "q6-9", "q7-9", "q8-9"],
-    data = {};
+    data = {},
+    densityFormat = d3.format(",.2f"),
+    percentageFormat = d3.format(".2%");
 
 // Map of maps
 var maps = {
@@ -45,6 +47,14 @@ var maps = {
     "color": "RdPu",
     "scale": d3.scale.threshold()
             .domain([10,33,100,333,1e3,3.33e3,10e3,33.3e3,100e3,1e6])
+            .range(brewer)
+  },
+  "slaveholders": {
+    "field": "slaveholders",
+    "label": "Slaveholders",
+    "color": "Oranges",
+    "scale": d3.scale.threshold()
+            .domain([1,10,33,100,333,1e3,3.33e3,10e3,33.3e3,100e3])
             .range(brewer)
   },
   "totalPopulation": {
@@ -110,7 +120,23 @@ var maps = {
     "scale": d3.scale.threshold()
             .domain([0,20,30,40,50,60,70,80,90,100.001])
             .range(brewer)
-  }
+  },
+  "slaveholderPercentage": {
+    "field": "slaveholdersPercentage",
+    "label": "Percentage slaveholders",
+    "color": "Oranges",
+    "scale": d3.scale.threshold()
+            .domain([0.1,10,20,30,40,50,60,70,80,100])
+            .range(brewer)
+  },
+  "slavesPerSlaveholder": {
+    "field": "slavesPerSlaveholder",
+    "label": "Slaves per slaveholder",
+    "color": "Oranges",
+    "scale": d3.scale.threshold()
+            .domain([0.1,10,20,30,40,50,60,70,80,100])
+            .range(brewer)
+  },
 };
 
 var current = { "year": 1790, "map" : maps.slavePopulation };
@@ -241,19 +267,15 @@ function ready(error, coast, us_1790, us_1800, us_1810, us_1820,
   data.us_1850 = us_1850;
   data.us_1860 = us_1860;
 
-    data["us_" + 1790].objects.county.geometries.forEach(function(d) {
-      // console.log(d.properties.slaveholdersPercentage);
-    });
-
     console.time("calcuate properties");
     
 
   // Calculate derivative properties
   for(var i = 1790; i <= 1860; i += 10) {
     data["us_" + i].objects.county.geometries.forEach(function(d) {
-      d.properties.slavePercentage = 100 * d.properties.slavePopulation / d.properties.totalPopulation;
-      d.properties.freeBlackPercentage = 100 * d.properties.freeBlackPopulation / d.properties.totalPopulation;
-      d.properties.whitePercentage = 100 * d.properties.whitePopulation / d.properties.totalPopulation;
+      d.properties.slavePercentage = d.properties.slavePopulation / d.properties.totalPopulation;
+      d.properties.freeBlackPercentage = d.properties.freeBlackPopulation / d.properties.totalPopulation;
+      d.properties.whitePercentage = d.properties.whitePopulation / d.properties.totalPopulation;
       d.properties.slaveDensity = d.properties.slavePopulation / sqMToSqMi(d.properties.area);
       d.properties.freeBlackDensity = d.properties.freeBlackPopulation / sqMToSqMi(d.properties.area);
       d.properties.whiteDensity = d.properties.whitePopulation / sqMToSqMi(d.properties.area);
@@ -262,6 +284,12 @@ function ready(error, coast, us_1790, us_1800, us_1810, us_1820,
   }
 
     console.timeEnd("calcuate properties");
+
+    data["us_" + 1790].objects.county.geometries.forEach(function(d) {
+      console.log((d.properties.slaveholdersPercentage));
+      // console.log((d.properties.slavesPerSlaveholder));
+    });
+
 
   // Draw the map for the first time
   slider.call(brush.event).call(brush.extent([1790, 1790])).call(brush.event);
@@ -272,39 +300,42 @@ function ready(error, coast, us_1790, us_1800, us_1810, us_1820,
 }  
 
 function tooltipText(d) {
-  var sPop   = d.properties.slavePopulation     || "N/A",
-      fbPop  = d.properties.freeBlackPopulation || "N/A",
-      wPop   = d.properties.whitePopulation     || "N/A",
-      sPerc  = d.properties.slavePercentage     || "N/A",
-      fbPerc = d.properties.freeBlackPercentage || "N/A",
-      wPerc  = d.properties.whitePercentage     || "N/A",
-      tPop   = d.properties.totalPopulation     || "N/A",
-      sDen   = d.properties.slaveDensity === 0 ? "N/A" : d3.round(d.properties.slaveDensity, 2),
-      fbDen  = d.properties.freeBlackDensity === 0 ? "N/A" : d3.round(d.properties.freeBlackDensity, 2),
-      wDen   = d.properties.whiteDensity === 0 ? "N/A" : d3.round(d.properties.whiteDensity, 2),
-      tDen   = d.properties.totalDensity        || "N/A";
+  var sPop   = d.properties.slavePopulation,
+      fbPop  = d.properties.freeBlackPopulation,
+      wPop   = d.properties.whitePopulation,
+      hPop   = d.properties.slaveholders,
+      sPh    = densityFormat(d.properties.slavesPerSlaveholder),
+      sPerc  = percentageFormat(d.properties.slavePercentage),
+      fbPerc = percentageFormat(d.properties.freeBlackPercentage),
+      wPerc  = percentageFormat(d.properties.whitePercentage),
+      hPerc  = percentageFormat(d.properties.slaveholdersPercentage),
+      tPop   = d.properties.totalPopulation,
+      sDen   = d.properties.slaveDensity === 0 ? "N/A" : densityFormat(d.properties.slaveDensity),
+      fbDen  = d.properties.freeBlackDensity === 0 ? "N/A" : densityFormat(d.properties.freeBlackDensity),
+      wDen   = d.properties.whiteDensity === 0 ? "N/A" : densityFormat(d.properties.whiteDensity),
+      tDen   = densityFormat(d.properties.totalDensity) || "N/A";
 
  return "<h5>" + d.properties.county + ", " + d.properties.state + "</h5>" +
    "<table>" +
    "<tr>" +
    "<td class='field'>Slave population: </td>" +
    "<td>" + sPop.toLocaleString() + "</td>" +
-   "<td style='width:65px;'>" + d3.round(sPerc, 1) + "%</td>" +
+   "<td style='width:65px;'>" + sPerc + "</td>" +
    "</tr><tr>"+
    "<td class='field'>Free black population: </td>" +
    "<td>" + fbPop.toLocaleString() + "</td>" +
-   "<td style='width:65px;'>" + d3.round(fbPerc, 1) + "%</td>" +
+   "<td style='width:65px;'>" + fbPerc + "</td>" +
    "</tr><tr>"+
    "<td class='field'>White population: </td>" +
    "<td>" + wPop.toLocaleString() + "</td>" +
-   "<td style='width:65px;'>" + d3.round(wPerc, 1) + "%</td>" +
+   "<td style='width:65px;'>" + wPerc + "</td>" +
    "</tr><tr>"+
    "<td class='field'>Total population: </td>" +
    "<td>" + tPop.toLocaleString() + "</td>" +
    "<td></td>" +
    "</tr><tr>"+
-   "<td class='field'>Enslaved persons/mile²: </td>" +
-   "<td>" + sDen + "</td>" +
+   "<td class='field table-break'>Enslaved persons/mile²: </td>" +
+   "<td class='table-break'>" + sDen + "</td>" +
    "</tr><tr>"+
    "<td class='field'>Free black persons/mile²: </td>" +
    "<td>" + fbDen + "</td>" +
@@ -313,7 +344,15 @@ function tooltipText(d) {
    "<td>" + wDen + "</td>" +
    "</tr><tr>"+
    "<td class='field'>All persons/mile²: </td>" +
-   "<td>" + d3.round(tDen, 2) + "</td>" +
+   "<td>" + tDen + "</td>" +
+   "</tr><tr>"+
+   "<td class='field table-break'>Slaveholders: </td>" +
+   "<td class='table-break'>" + hPop.toLocaleString() + "</td>" +
+   "<td class='table-break' style='width:65px;'>" + hPerc + "</td>" +
+   "</tr><tr>"+
+   "<td class='field'>Slaves per slaveholder: </td>" +
+   "<td>" + sPh.toLocaleString() + "</td>" +
+   "<td></td>" +
    "</tr></table>";
 }
 
@@ -362,7 +401,7 @@ function drawMap(date, map) {
 
       tooltip
       .classed("hidden", false)
-      .attr("style", "left:" + (mouse[0] + 20) + "px; top:" + (mouse[1] - 50) + "px")
+      .attr("style", "left:" + (mouse[0] + 20) + "px; top:" + (mouse[1] - 100) + "px")
       .html(tooltipText(d)); 
     })
     .on("mouseout", function(d, i) {

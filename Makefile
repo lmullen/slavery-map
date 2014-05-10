@@ -19,7 +19,7 @@ us_1790.json: $(shapefiles)/county_1790.shp
 		-p slavePopulation=+AAQ002 \
 		-p slavesPerSlaveholder=+AAJ001 \
 		-p slaveholders='+AAE001 + +AAE002' \
-		-p slaveholdersPercentage='100 * (+AAE001 + +AAE002) / (+AAE003 + +AAE003 + +AAE003 + +AAE004)' \
+		-p slaveholdersPercentage='(+AAE001 + +AAE002) / (+AAE003 + +AAE003 + +AAE003 + +AAE004)' \
 		-e data/nhgis0014_ts_county.csv \
 		-p totalPopulation=+A00AA1790 \
 		-- county=$< 
