@@ -183,6 +183,12 @@ var handle = slider.append("circle")
 var fieldSelector = d3.select("#field-selector")
       .on("change", fieldSelected);
 
+for (var key in maps) {
+  fieldSelector.append("option")
+  .attr("value", key)
+  .text(maps[key].label);
+}
+
 // Legend
 var legend = svg.append("g")
   .attr("transform", "translate(" + (width - 180) + "," + 200 + ")")
@@ -399,41 +405,7 @@ function drawCoast() {
 
 function fieldSelected() {
   field = fieldSelector.node().value;
-  switch (field) {
-    case "Slave population":
-      drawMap(current.year, maps.slavePopulation);
-      break;
-    case "Free black population":
-      drawMap(current.year, maps.freeBlackPopulation);
-      break;
-    case "White population":
-      drawMap(current.year, maps.whitePopulation);
-      break;
-    case "Total population":
-      drawMap(current.year, maps.totalPopulation);
-      break;
-    case "Enslaved persons/mile²":
-      drawMap(current.year, maps.slaveDensity);
-      break;
-    case "Free black persons/mile²":
-      drawMap(current.year, maps.freeBlackDensity);
-      break;
-    case "White persons/mile²":
-      drawMap(current.year, maps.whiteDensity);
-      break;
-    case "All persons/mile²":
-      drawMap(current.year, maps.totalDensity);
-      break;
-    case "Percentage enslaved":
-      drawMap(current.year, maps.slavePercentage);
-      break;
-    case "Percentage free black":
-      drawMap(current.year, maps.freeBlackPercentage);
-      break;
-    case "Percentage white":
-      drawMap(current.year, maps.whitePercentage);
-      break;
-  }
+  drawMap(current.year, maps[field]);
 }
 
 function updateLegend(map) {
