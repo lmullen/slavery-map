@@ -108,7 +108,7 @@ var maps = {
     "label": "Percentage white",
     "color": "RdPu",
     "scale": d3.scale.threshold()
-            .domain([0.1,10,20,30,40,50,60,70,80,100])
+            .domain([0,20,30,40,50,60,70,80,90,100.001])
             .range(brewer)
   }
 };
@@ -457,7 +457,9 @@ function updateLegend(map) {
       .append("text")
       .attr("x", 12)
       .attr("y", i * 20 + 5)
-      .text(bounds[0].toLocaleString() + "–" + bounds[1].toLocaleString() );
+      .text(d3.round(bounds[0], 2).toLocaleString() + 
+            "–" +
+            d3.round(bounds[1], 2).toLocaleString() );
   }
 
   legendColors.append("circle")
