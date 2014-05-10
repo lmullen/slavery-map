@@ -54,6 +54,7 @@ us_1810.json: $(shapefiles)/county_1810.shp
 		-p slavePopulation=+AA7002 \
 		-e data/nhgis0014_ts_county.csv \
 		-p totalPopulation=+A00AA1810 \
+		-p whitePopulation='+A00AA1810 - +AA7001 - +AA7002' \
 		-- county=$< 
 
 us_1820.json: $(shapefiles)/county_1820.shp
