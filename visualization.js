@@ -187,6 +187,10 @@ function ready(error, coast, us_1790, us_1800, us_1810, us_1820,
   data.us_1850 = us_1850;
   data.us_1860 = us_1860;
 
+    data["us_" + 1790].objects.county.geometries.forEach(function(d) {
+      console.log(d.properties.slaveholdersPercentage);
+    });
+
   // Calculate derivative properties
   for(var i = 1790; i <= 1860; i += 10) {
     data["us_" + i].objects.county.geometries.forEach(function(d) {

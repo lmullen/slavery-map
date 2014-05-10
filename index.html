@@ -54,8 +54,12 @@ spread across the United States.">
   <div id="description">
     <p>
     <strong>How to use this map:</strong> Zoom to any county by clicking on 
-    it. Clicking on the same county will zoom out.
-    </p>
+    it. Clicking on the same county will zoom out. The scales preserve 
+    intensity for change over time: in other words, a color represents the 
+    same thing for each year on the map. However, the color scales do not 
+    preserve intensity from data field to data field: the darkest color for 
+    the total population does not represent the same values as for the 
+    enslaved population.</p>
     <p>
     The U.S. Census data and shapefiles for these maps comes from Minnesota 
     Population Center, <a href="https://www.nhgis.org/"><em>National 
@@ -65,16 +69,131 @@ spread across the United States.">
          censuses, see <a 
     href="http://www.census.gov/population/www/censusdata/hiscendata.html"><em>Measuring 
   America: The Decennial Censuses From 1790 to 2000</em></a> (U.S Census 
-  Bureau, 2002).
-    </p>
-    <p>
-    Map by <a href="http://lincolnmullen.com">Lincoln Mullen</a>. <a 
-      href="https://github.com/lmullen/slavery-nhgis">Code</a> available on 
-    GitHub,
-    licensed <a href="http://lmullen.mit-license.org/">MIT</a>. Suggestions 
-    welcome <a 
-    href="https://github.com/lmullen/slavery-nhgis/issues">here</a>.
-    </p>
+  Bureau, 2002). Bear in mind that the reason we have census statistics on 
+  slavery. The federal constitution requires a decennial census in order to 
+  apportion Congressional representation and direct taxes. Slaves were counted
+  in census because of the three-fifths compromise, by which an enslaved 
+  person counted as three-fifths of a person for representation and taxation.  
+  See Below for a description of the fields in the NHGIS database that I have 
+  used for each representation on the map.
+  </p>
+  <hr>
+  <p>
+  Map by <a href="http://lincolnmullen.com">Lincoln Mullen</a>. <a 
+    href="https://github.com/lmullen/slavery-map">Code available on 
+  GitHub</a>, licensed MIT. Suggestions and criticism welcome via e-mail: <a 
+href="mailto:lincoln@lincolnmullen.com">lincoln@lincolnmullen.com</a>.
+  </p>
+  <hr>
+  <h5>1790 Census</h5>
+  <ul>
+    <li>Slave population: "Race/Slave Status: Persons: Non-White: Slave" 
+    (AAQ002)</li>
+    <li>Total population: (A00AA1790)</li>
+    <li>Free black population: "Race/Slave Status: Persons: Non-White: Free" 
+    (AAQ001)</li>
+    <li>Free white population:"Race/Slave Status: Persons: White" 
+    (AAQ003)</li>
+    <li>Slaveholders: sum of "Families by Slaveholding Status by Race: 
+    Slaveholding family: White" and "Families by Slaveholding Status by Race: 
+    Slaveholding family: Free Colored"
+    (AAE001 and AAE002)</li>
+    <li>Slaves per slaveholder: "Average Number of Slaves per Slaveholding 
+    Family" (AAJ001)</li>
+    <li>Percentage slaveholders: calculated from the total of slaveholding 
+    families and non-slaveholding families (AAE001, AAE002, AAE003, and 
+    AAE004)
+    <li>Percentage enslaved: calculated from slave population and total 
+    population</li>
+    <li>Slave population density: calculated from slave population and area of
+    the county</li>
+    <li>Total population density: calculated from slave population and area of
+    the country</li>
+  </ul>
+  <h5>1800 Census</h5>
+  <ul>
+    <li>Slave population: (field)</li>
+    <li>Total population: (field)</li>
+    <li>Free black population: (field)</li>
+    <li>Free white population: (field)</li>
+    <li>Slaveholders: (field)</li>
+    <li>Slaves per slaveholder: ()</li>
+    <li>Percentage enslaved: calculated</li>
+    <li>Slave population density: calculated</li>
+    <li>Total population density: calculated</li>
+  </ul>
+  <h5>1810 Census</h5>
+  <ul>
+    <li>Slave population: (field)</li>
+    <li>Total population: (field)</li>
+    <li>Free black population: (field)</li>
+    <li>Free white population: (field)</li>
+    <li>Slaveholders: (field)</li>
+    <li>Slaves per slaveholder: ()</li>
+    <li>Percentage enslaved: calculated</li>
+    <li>Slave population density: calculated</li>
+    <li>Total population density: calculated</li>
+  </ul>
+  <h5>1820 Census</h5>
+  <ul>
+    <li>Slave population: (field)</li>
+    <li>Total population: (field)</li>
+    <li>Free black population: (field)</li>
+    <li>Free white population: (field)</li>
+    <li>Slaveholders: (field)</li>
+    <li>Slaves per slaveholder: ()</li>
+    <li>Percentage enslaved: calculated</li>
+    <li>Slave population density: calculated</li>
+    <li>Total population density: calculated</li>
+  </ul>
+  <h5>1830 Census</h5>
+  <ul>
+    <li>Slave population: (field)</li>
+    <li>Total population: (field)</li>
+    <li>Free black population: (field)</li>
+    <li>Free white population: (field)</li>
+    <li>Slaveholders: (field)</li>
+    <li>Slaves per slaveholder: ()</li>
+    <li>Percentage enslaved: calculated</li>
+    <li>Slave population density: calculated</li>
+    <li>Total population density: calculated</li>
+  </ul>
+  <h5>1840 Census</h5>
+  <ul>
+    <li>Slave population: (field)</li>
+    <li>Total population: (field)</li>
+    <li>Free black population: (field)</li>
+    <li>Free white population: (field)</li>
+    <li>Slaveholders: (field)</li>
+    <li>Slaves per slaveholder: ()</li>
+    <li>Percentage enslaved: calculated</li>
+    <li>Slave population density: calculated</li>
+    <li>Total population density: calculated</li>
+  </ul>
+  <h5>1850 Census</h5>
+  <ul>
+    <li>Slave population: (field)</li>
+    <li>Total population: (field)</li>
+    <li>Free black population: (field)</li>
+    <li>Free white population: (field)</li>
+    <li>Slaveholders: (field)</li>
+    <li>Slaves per slaveholder: ()</li>
+    <li>Percentage enslaved: calculated</li>
+    <li>Slave population density: calculated</li>
+    <li>Total population density: calculated</li>
+  </ul>
+  <h5>1860 Census</h5>
+  <ul>
+    <li>Slave population: (field)</li>
+    <li>Total population: (field)</li>
+    <li>Free black population: (field)</li>
+    <li>Free white population: (field)</li>
+    <li>Slaveholders: (field)</li>
+    <li>Slaves per slaveholder: ()</li>
+    <li>Percentage enslaved: calculated</li>
+    <li>Slave population density: calculated</li>
+    <li>Total population density: calculated</li>
+  </ul>
   </div>
 </div>
 </div>
