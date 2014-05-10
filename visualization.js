@@ -110,7 +110,7 @@ var maps = {
     "label": "Percentage free blacks",
     "color": "YlGn",
     "scale": d3.scale.threshold()
-            .domain([0.1,10,20,30,40,50,60,70,80,100])
+            .domain([0.01,0.033,0.10,0.33,1.00,3.33,6.66,10,20,40])
             .range(brewer)
   },
   "whitePercentage": {
@@ -273,9 +273,9 @@ function ready(error, coast, us_1790, us_1800, us_1810, us_1820,
   // Calculate derivative properties
   for(var i = 1790; i <= 1860; i += 10) {
     data["us_" + i].objects.county.geometries.forEach(function(d) {
-      d.properties.slavePercentage = d.properties.slavePopulation / d.properties.totalPopulation;
-      d.properties.freeBlackPercentage = d.properties.freeBlackPopulation / d.properties.totalPopulation;
-      d.properties.whitePercentage = d.properties.whitePopulation / d.properties.totalPopulation;
+      d.properties.slavePercentage = 100 * d.properties.slavePopulation / d.properties.totalPopulation;
+      d.properties.freeBlackPercentage = 100 * d.properties.freeBlackPopulation / d.properties.totalPopulation;
+      d.properties.whitePercentage = 100 * d.properties.whitePopulation / d.properties.totalPopulation;
       d.properties.slaveDensity = d.properties.slavePopulation / sqMToSqMi(d.properties.area);
       d.properties.freeBlackDensity = d.properties.freeBlackPopulation / sqMToSqMi(d.properties.area);
       d.properties.whiteDensity = d.properties.whitePopulation / sqMToSqMi(d.properties.area);
@@ -305,10 +305,10 @@ function tooltipText(d) {
       wPop   = d.properties.whitePopulation,
       hPop   = d.properties.slaveholders,
       sPh    = densityFormat(d.properties.slavesPerSlaveholder),
-      sPerc  = percentageFormat(d.properties.slavePercentage),
-      fbPerc = percentageFormat(d.properties.freeBlackPercentage),
-      wPerc  = percentageFormat(d.properties.whitePercentage),
-      hPerc  = percentageFormat(d.properties.slaveholdersPercentage),
+      sPerc  = percentageFormat(d.properties.slavePercentage / 100),
+      fbPerc = percentageFormat(d.properties.freeBlackPercentage / 100),
+      wPerc  = percentageFormat(d.properties.whitePercentage / 100),
+      hPerc  = percentageFormat(d.properties.slaveholdersPercentage / 100),
       tPop   = d.properties.totalPopulation,
       sDen   = d.properties.slaveDensity === 0 ? "N/A" : densityFormat(d.properties.slaveDensity),
       fbDen  = d.properties.freeBlackDensity === 0 ? "N/A" : densityFormat(d.properties.freeBlackDensity),
