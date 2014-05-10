@@ -28,7 +28,7 @@ var maps = {
     "label": "Slave population",
     "color": "YlOrRd",
     "scale": d3.scale.threshold()
-            .domain([1,10,50,100,500,1e3,5e3,10e3,50e3,100e3])
+            .domain([1,10,33,100,333,1e3,3.33e3,10e3,33.3e3,100e3])
             .range(brewer)
   },
   "totalPopulation": {
@@ -36,7 +36,7 @@ var maps = {
     "label": "Total population",
     "color": "YlGnBu",
     "scale": d3.scale.threshold()
-            .domain([10,50,100,500,1e3,5e3,10e3,50e3,100e3,1e6])
+            .domain([10,33,100,333,1e3,3.33e3,10e3,33.3e3,100e3,1e6])
             .range(brewer)
   },
   "slaveDensity": {
