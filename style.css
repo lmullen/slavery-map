@@ -29,6 +29,10 @@ h1 {
   pointer-events: none;
 }
 
+.na {
+  fill: lightgray;
+}
+
 .coast {
   fill: none;
   stroke: #aaa;
