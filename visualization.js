@@ -118,7 +118,7 @@ var maps = {
     "label": "Percentage white",
     "color": "RdPu",
     "scale": d3.scale.threshold()
-            .domain([0,30,40,50,60,70,80,90,95,100.001])
+            .domain([0,30,40,50,60,70,80,90,99,100.001])
             .range(brewer)
   },
   "slaveholderPercentage": {
