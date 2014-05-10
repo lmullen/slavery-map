@@ -83,8 +83,9 @@ us_1830.json: $(shapefiles)/county_1830.shp
 		-p county=NHGISNAM \
 		-p state=STATENAM \
 		-p area=+SHAPE_AREA \
-		-p freeBlackPopulation=+ABQ002 \
-		-p slavePopulation=+ABQ001 \
+		-p freeBlackPopulation='+ABO005 + +ABO006' \
+		-p slavePopulation='+ABO003 + +ABO004' \
+		-p whitePopulation='+ABO001 + +ABO002' \
 		-e data/nhgis0014_ts_county.csv \
 		-p totalPopulation=+A00AA1830 \
 		-- county=$< 
