@@ -46,7 +46,7 @@ var maps = {
     "label": "Enslaved population (%)",
     "color": "YlOrRd",
     "scale": d3.scale.threshold()
-            .domain([0.1,10,20,30,40,50,60,70,80,100])
+            .domain([0.1,1,10,20,30,40,50,60,70,100])
             .range(brewer)
   },
   "freeAfAmPopulation": {
@@ -70,7 +70,7 @@ var maps = {
     "label": "Free African Americans (%)",
     "color": "YlGn",
     "scale": d3.scale.threshold()
-            .domain([0.01,0.033,0.10,0.33,1.00,3.33,6.66,10,20,40])
+            .domain([0.1,1,2.5,5,7.5,10,20,30,40,100])
             .range(brewer)
   },
   "totalPopulation": {
