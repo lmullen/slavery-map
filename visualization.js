@@ -249,14 +249,14 @@ function ready(error, coast, us_1790, us_1800, us_1810, us_1820,
 }  
 
 function tooltipText(d) {
-  var sPop   = d.properties.slavePopulation || "",
-      fbPop  = d.properties.freeAfAmPopulation || "",
-      sPerc  = percentageFormat(d.properties.slavePercentage / 100) || "",
-      fbPerc = percentageFormat(d.properties.freeAfAmPercentage / 100) || "",
-      tPop   = d.properties.totalPopulation || "",
-      sDen   = d.properties.slaveDensity === 0 ? "N/A" : densityFormat(d.properties.slaveDensity),
-      fbDen  = d.properties.freeAfAmDensity === 0 ? "N/A" : densityFormat(d.properties.freeAfAmDensity),
-      tDen   = densityFormat(d.properties.totalDensity) || "";
+  var sPop   = isNaN(d.properties.slavePopulation)    ? "n/a" : d.properties.slavePopulation,
+      fbPop  = isNaN(d.properties.freeAfAmPopulation) ? "n/a" : d.properties.freeAfAmPopulation,
+      sPerc  = isNaN(d.properties.slavePercentage)    ? "n/a" : percentageFormat(d.properties.slavePercentage / 100), 
+      fbPerc = isNaN(d.properties.freeAfAmPercentage) ? "n/a" : percentageFormat(d.properties.slavePercentage / 100), 
+      tPop   = isNaN(d.properties.totalPopulation)    ? "n/a" : d.properties.totalPopulation,
+      sDen   = isNaN(d.properties.slaveDensity)       ? "n/a" : densityFormat(d.properties.slaveDensity),
+      fbDen  = isNaN(d.properties.freeAfAmDensity)    ? "n/a" : densityFormat(d.properties.freeAfAmDensity),
+      tDen   = isNaN(d.properties.totalDensity)       ? "n/a" : densityFormat(d.properties.totalDensity);
 
  return "<h5>" + d.properties.county + ", " + d.properties.state + "</h5>" +
    "<table>" +
