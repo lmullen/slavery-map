@@ -27,42 +27,10 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
 var maps = {
   "slavePopulation": {
     "field": "slavePopulation",
-    "label": "Slave population",
+    "label": "Enslaved population",
     "color": "YlOrRd",
     "scale": d3.scale.threshold()
             .domain([1,10,33,100,333,1e3,3.33e3,10e3,33.3e3,100e3])
-            .range(brewer)
-  },
-  "freeAfAmPopulation": {
-    "field": "freeAfAmPopulation",
-    "label": "Free African American population",
-    "color": "YlGn",
-    "scale": d3.scale.threshold()
-            .domain([1,10,33,100,333,1e3,3.33e3,10e3,33.3e3,100e3])
-            .range(brewer)
-  },
-  "whitePopulation": {
-    "field": "whitePopulation",
-    "label": "White population",
-    "color": "RdPu",
-    "scale": d3.scale.threshold()
-            .domain([10,33,100,333,1e3,3.33e3,10e3,33.3e3,100e3,1e6])
-            .range(brewer)
-  },
-  "slaveholders": {
-    "field": "slaveholders",
-    "label": "Slaveholders",
-    "color": "Oranges",
-    "scale": d3.scale.threshold()
-            .domain([1,10,33,100,333,1e3,3.33e3,10e3,33.3e3,100e3])
-            .range(brewer)
-  },
-  "totalPopulation": {
-    "field": "totalPopulation",
-    "label": "Total population",
-    "color": "YlGnBu",
-    "scale": d3.scale.threshold()
-            .domain([10,33,100,333,1e3,3.33e3,10e3,33.3e3,100e3,1e6])
             .range(brewer)
   },
   "slaveDensity": {
@@ -73,6 +41,22 @@ var maps = {
             .domain([0.01,0.5,1,5,10,20,30,40,50,200])
             .range(brewer)
   },
+  "slavePercentage": {
+    "field": "slavePercentage",
+    "label": "Enslaved population (%)",
+    "color": "YlOrRd",
+    "scale": d3.scale.threshold()
+            .domain([0.1,10,20,30,40,50,60,70,80,100])
+            .range(brewer)
+  },
+  "freeAfAmPopulation": {
+    "field": "freeAfAmPopulation",
+    "label": "Free African Americans",
+    "color": "YlGn",
+    "scale": d3.scale.threshold()
+            .domain([1,10,33,100,333,1e3,3.33e3,10e3,33.3e3,100e3])
+            .range(brewer)
+  },
   "freeAfAmDensity": {
     "field": "freeAfAmDensity",
     "label": "Free African Americans/mile²",
@@ -81,13 +65,21 @@ var maps = {
             .domain([0.01,0.5,1,5,10,20,30,40,50,200])
             .range(brewer)
   },
-  "whiteDensity": {
-    "field": "whiteDensity",
-    "label": "White persons/mile²",
-    "color": "RdPu",
+  "freeAfAmPercentage": {
+    "field": "freeAfAmPercentage",
+    "label": "Free African Americans (%)",
+    "color": "YlGn",
     "scale": d3.scale.threshold()
-             .domain([0.01,1,5,10,25,50,100,500,1e3,50e3])
-             .range(brewer)
+            .domain([0.01,0.033,0.10,0.33,1.00,3.33,6.66,10,20,40])
+            .range(brewer)
+  },
+  "totalPopulation": {
+    "field": "totalPopulation",
+    "label": "Total population",
+    "color": "YlGnBu",
+    "scale": d3.scale.threshold()
+            .domain([10,33,100,333,1e3,3.33e3,10e3,33.3e3,100e3,1e6])
+            .range(brewer)
   },
   "totalDensity": {
     "field": "totalDensity",
@@ -96,47 +88,7 @@ var maps = {
     "scale": d3.scale.threshold()
              .domain([0.01,1,5,10,25,50,100,500,1e3,50e3])
              .range(brewer)
-  },
-  "slavePercentage": {
-    "field": "slavePercentage",
-    "label": "Percentage enslaved",
-    "color": "YlOrRd",
-    "scale": d3.scale.threshold()
-            .domain([0.1,10,20,30,40,50,60,70,80,100])
-            .range(brewer)
-  },
-  "freeAfAmPercentage": {
-    "field": "freeAfAmPercentage",
-    "label": "Percentage free African Americans",
-    "color": "YlGn",
-    "scale": d3.scale.threshold()
-            .domain([0.01,0.033,0.10,0.33,1.00,3.33,6.66,10,20,40])
-            .range(brewer)
-  },
-  "whitePercentage": {
-    "field": "whitePercentage",
-    "label": "Percentage white",
-    "color": "RdPu",
-    "scale": d3.scale.threshold()
-            .domain([0,30,40,50,60,70,80,90,99,100.001])
-            .range(brewer)
-  },
-  "slaveholderPercentage": {
-    "field": "slaveholdersPercentage",
-    "label": "Percentage slaveholders",
-    "color": "Oranges",
-    "scale": d3.scale.threshold()
-            .domain([0.1,10,20,30,40,50,60,70,80,100])
-            .range(brewer)
-  },
-  "slavesPerSlaveholder": {
-    "field": "slavesPerSlaveholder",
-    "label": "Slaves per slaveholder",
-    "color": "Oranges",
-    "scale": d3.scale.threshold()
-            .domain([0.1,10,20,30,40,50,60,70,80,100])
-            .range(brewer)
-  },
+  }
 };
 
 var current = { "year": 1790, "map" : maps.slavePopulation };
@@ -217,7 +169,7 @@ for (var key in maps) {
 
 // Legend
 var legend = svg.append("g")
-  .attr("transform", "translate(" + (width - 180) + "," + 200 + ")")
+  .attr("transform", "translate(" + (width - 190) + "," + 200 + ")")
   .classed("legend", true);
 
 var legendDate = legend.append("g")
@@ -278,17 +230,15 @@ function ready(error, coast, us_1790, us_1800, us_1810, us_1820,
     data["us_" + i].objects.county.geometries.forEach(function(d) {
       d.properties.slavePercentage = 100 * d.properties.slavePopulation / d.properties.totalPopulation;
       d.properties.freeAfAmPercentage = 100 * d.properties.freeAfAmPopulation / d.properties.totalPopulation;
-      d.properties.whitePercentage = 100 * d.properties.whitePopulation / d.properties.totalPopulation;
       d.properties.slaveDensity = d.properties.slavePopulation / sqMToSqMi(d.properties.area);
       d.properties.freeAfAmDensity = d.properties.freeAfAmPopulation / sqMToSqMi(d.properties.area);
-      d.properties.whiteDensity = d.properties.whitePopulation / sqMToSqMi(d.properties.area);
       d.properties.totalDensity = d.properties.totalPopulation / sqMToSqMi(d.properties.area);
     });
   }
 
-    data["us_" + 1800].objects.county.geometries.forEach(function(d) {
+    // data["us_" + 1800].objects.county.geometries.forEach(function(d) {
       // console.log((d.properties.whitePopulation));
-    });
+    // });
 
   // Draw the map for the first time
   slider.call(brush.event).call(brush.extent([1790, 1790])).call(brush.event);
@@ -301,57 +251,36 @@ function ready(error, coast, us_1790, us_1800, us_1810, us_1820,
 function tooltipText(d) {
   var sPop   = d.properties.slavePopulation || "",
       fbPop  = d.properties.freeAfAmPopulation || "",
-      wPop   = d.properties.whitePopulation || "",
-      hPop   = d.properties.slaveholders || "",
-      sPh    = densityFormat(d.properties.slavesPerSlaveholder) || "",
       sPerc  = percentageFormat(d.properties.slavePercentage / 100) || "",
       fbPerc = percentageFormat(d.properties.freeAfAmPercentage / 100) || "",
-      wPerc  = percentageFormat(d.properties.whitePercentage / 100) || "",
-      hPerc  = percentageFormat(d.properties.slaveholdersPercentage / 100) || "",
       tPop   = d.properties.totalPopulation || "",
       sDen   = d.properties.slaveDensity === 0 ? "N/A" : densityFormat(d.properties.slaveDensity),
       fbDen  = d.properties.freeAfAmDensity === 0 ? "N/A" : densityFormat(d.properties.freeAfAmDensity),
-      wDen   = d.properties.whiteDensity === 0 ? "N/A" : densityFormat(d.properties.whiteDensity),
       tDen   = densityFormat(d.properties.totalDensity) || "";
 
  return "<h5>" + d.properties.county + ", " + d.properties.state + "</h5>" +
    "<table>" +
    "<tr>" +
-   "<td class='field'>Slave population: </td>" +
+   "<td class='field'>Slaves: </td>" +
    "<td>" + sPop.toLocaleString() + "</td>" +
    "<td style='width:65px;'>" + sPerc + "</td>" +
    "</tr><tr>"+
-   "<td class='field'>Free African American population: </td>" +
+   "<td class='field'>Free African Americans: </td>" +
    "<td>" + fbPop.toLocaleString() + "</td>" +
    "<td style='width:65px;'>" + fbPerc + "</td>" +
-   "</tr><tr>"+
-   "<td class='field'>White population: </td>" +
-   "<td>" + wPop.toLocaleString() + "</td>" +
-   "<td style='width:65px;'>" + wPerc + "</td>" +
    "</tr><tr>"+
    "<td class='field'>Total population: </td>" +
    "<td>" + tPop.toLocaleString() + "</td>" +
    "<td></td>" +
    "</tr><tr>"+
-   "<td class='field table-break'>Enslaved persons/mile²: </td>" +
+   "<td class='field table-break'>Slaves/mile²: </td>" +
    "<td class='table-break'>" + sDen + "</td>" +
    "</tr><tr>"+
    "<td class='field'>Free African Americans/mile²: </td>" +
    "<td>" + fbDen + "</td>" +
    "</tr><tr>"+
-   "<td class='field'>White persons/mile²: </td>" +
-   "<td>" + wDen + "</td>" +
-   "</tr><tr>"+
    "<td class='field'>All persons/mile²: </td>" +
    "<td>" + tDen + "</td>" +
-   "</tr><tr>"+
-   "<td class='field table-break'>Slaveholders: </td>" +
-   "<td class='table-break'>" + hPop.toLocaleString() + "</td>" +
-   "<td class='table-break' style='width:65px;'>" + hPerc + "</td>" +
-   "</tr><tr>"+
-   "<td class='field'>Slaves per slaveholder: </td>" +
-   "<td>" + sPh.toLocaleString() + "</td>" +
-   "<td></td>" +
    "</tr></table>";
 }
 
