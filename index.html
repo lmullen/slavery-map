@@ -17,12 +17,12 @@ spread across the United States.">
 <script src="http://d3js.org/topojson.v1.min.js" charset="utf-8"></script>
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-25121492-1', 'lincolnmullen.com');
-  ga('send', 'pageview');
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-25121492-1', 'lincolnmullen.com');
+ga('send', 'pageview');
 </script>
 
 </head>
@@ -47,14 +47,26 @@ spread across the United States.">
 </div>
 <div class="row">
   <div id="description">
+    <h5>How to use this map</h5>
     <p>
-    <strong>How to use this map:</strong> Zoom to any county by clicking on 
-    it. Clicking on the same county will zoom out. The scales preserve 
-    intensity for change over time: in other words, a color represents the 
-    same thing for each year on the map. However, the color scales do not 
-    preserve intensity from data field to data field: the darkest color for 
-    the total population does not represent the same values as for the 
-    enslaved population.</p>
+    Zoom to any county by clicking on it. Clicking on the same county will 
+    zoom out. The scales preserve intensity for change over time: in other 
+    words, a color represents the same thing for each year on the map.  
+    However, the color scales do not preserve necessarily intensity from data 
+    field to data field: the darkest color for the total population does not 
+    represent the same values as for the enslaved population. The scales for 
+    population are logarithmic (with intermediate values) so every second step 
+    in the color ramp represents a ten-fold (not a two-fold) increase.
+    </p>
+    <hr>
+    <p>
+    Map by <a href="http://lincolnmullen.com">Lincoln Mullen</a>. Code 
+    available on <a href="https://github.com/lmullen/slavery-map">
+    GitHub</a>, licensed MIT. Suggestions and criticism welcome: <a 
+    href="mailto:lincoln@lincolnmullen.com">lincoln@lincolnmullen.com</a>.
+    </p>
+    <hr>
+    <h5>Explanation of Census data</h5>
     <p>
     The U.S. Census data and shapefiles for these maps comes from Minnesota 
     Population Center, <a href="https://www.nhgis.org/"><em>National 
@@ -64,87 +76,80 @@ spread across the United States.">
          censuses, see <a 
     href="http://www.census.gov/population/www/censusdata/hiscendata.html"><em>Measuring 
   America: The Decennial Censuses From 1790 to 2000</em></a> (U.S Census 
-  Bureau, 2002). Bear in mind that the reason we have census statistics on 
-  slavery. The federal constitution requires a decennial census in order to 
-  apportion Congressional representation and direct taxes. Slaves were counted
-  in census because of the three-fifths compromise, by which an enslaved 
-  person counted as three-fifths of a person for representation and taxation.  
-  See Below for a description of the fields in the NHGIS database that I have 
-  used for each representation on the map.
-  </p>
-  <hr>
-  <p>
-  Map by <a href="http://lincolnmullen.com">Lincoln Mullen</a>. <a 
-    href="https://github.com/lmullen/slavery-map">Code available on 
-  GitHub</a>, licensed MIT. Suggestions and criticism welcome via e-mail: <a 
-href="mailto:lincoln@lincolnmullen.com">lincoln@lincolnmullen.com</a>.
-  </p>
-  <hr>
-  <h3>Explanation of Census Data Used</h3>
-  <h5>1790 Census</h5>
-  <ul>
-    <li>Slave population: "Race/Slave Status: Persons: Non-White: Slave" 
-    (AAQ002)</li>
-    <li>Total population: (A00AA1790)</li>
-    <li>Free African American population: "Race/Slave Status: Persons: 
-    Non-White: Free" (AAQ001)</li>
-  </ul>
-  <h5>1800 Census</h5>
-  <ul>
-    <li>Slave population: "Nonwhite Population, Except Indians Not Taxed by 
-    Slave Status: Slave" (AAY002)</li>
-    <li>Total population: (A00AA1800)</li>
-    <li>Free African American population: "Nonwhite Population, Except Indians 
-    Not Taxed by Slave Status: Free" (AAY001)</li>
-  </ul>
-  <h5>1810 Census</h5>
-  <ul>
-    <li>Slave population: "Nonwhite Population, Except Indians Not Taxed by 
-    Slave Status: Slave" (AA7002)</li>
-    <li>Total population: (A00AA1810)</li>
-    <li>Free African American population: "Nonwhite Population, Except Indians 
-    Not Taxed by Slave Status: Free" (AA7001)</li>
-  </ul>
-  <h5>1820 Census</h5>
-  <ul>
-    <li>Slave population: sum of "Nonwhite: slave" male and female columns for 
-    "Race/Slave Status by Sex" (ABB003 and ABB004)</li>
-    <li>Total population: (A00AA1820)</li>
-    <li>Free African American population: sum of "Nonwhite: free" male and 
-    female columns for "Race/Slave Status by Sex" (ABB005 and ABB006)</li>
-  </ul>
-  <h5>1830 Census</h5>
-  <ul>
-    <li>Slave population: sum of "Nonwhite: slave" male and female columns for 
-    "Race/Slave Status by Sex" (ABO003 and ABO004)</li>
-    <li>Total population: (A00AA1830)</li>
-    <li>Free African American population: sum of "Nonwhite: free" male and 
-    female columns for "Race/Slave Status by Sex" (ABO005 and ABO006)</li>
-  </ul>
-  <h5>1840 Census</h5>
-  <ul>
-    <li>Slave population: "Nonwhite: slave" column for "Race/Slave Status" 
-    (ACS003)</li>
-    <li>Total population: (A00AA1840)</li>
-    <li>Free African American population: "Nonwhite: free" column for 
-    "Race/Slave Status" (ACS002)</li>
-  </ul>
-  <h5>1850 Census</h5>
-  <ul>
-    <li>Slave population: "Nonwhite: slave" column for "Race/Slave Status" 
-    (AE6003)</li>
-    <li>Total population: (A00AA1840)</li>
-    <li>Free African American population: "Nonwhite: free" column for 
-    "Race/Slave Status" (AE6002)</li>
-  </ul>
-  <h5>1860 Census</h5>
-  <ul>
-    <li>Slave population: sum of "Slave" male and female columns for "Race by 
-    Sex" (AH2005 and AH2006)</li>
-    <li>Total population: (A00AA1860)</li>
-    <li>Free African American population: sum of "Free colored" male and 
-    female columns for "Race by Sex" (AH2003 and AH2004)</li>
-  </ul>
+  Bureau, 2002). Bear in mind that the reason the Census kept statistics on 
+  slavery. Slaves were counted
+    in the census because of the three-fifths compromise in the federal 
+    constitution, by which an enslaved person counted as three-fifths of a 
+    person for apportioning representation in Congress and direct taxes.  See 
+    below for a description of the fields in the NHGIS database that I have 
+    used. I have tried to represent unavailable data on the map, but sometimes 
+    in the Census a value of zero actually means that the data has been lost 
+    or was never gathered.
+    </p>
+    <h6>1790 Census</h6>
+    <ul>
+      <li>Slave population: "Race/Slave Status: Persons: Non-White: Slave" 
+      (AAQ002)</li>
+      <li>Total population: (A00AA1790)</li>
+      <li>Free African American population: "Race/Slave Status: Persons: 
+      Non-White: Free" (AAQ001)</li>
+    </ul>
+    <h6>1800 Census</h6>
+    <ul>
+      <li>Slave population: "Nonwhite Population, Except Indians Not Taxed by 
+      Slave Status: Slave" (AAY002)</li>
+      <li>Total population: (A00AA1800)</li>
+      <li>Free African American population: "Nonwhite Population, Except 
+      Indians Not Taxed by Slave Status: Free" (AAY001)</li>
+    </ul>
+    <h6>1810 Census</h6>
+    <ul>
+      <li>Slave population: "Nonwhite Population, Except Indians Not Taxed by 
+      Slave Status: Slave" (AA7002)</li>
+      <li>Total population: (A00AA1810)</li>
+      <li>Free African American population: "Nonwhite Population, Except 
+      Indians Not Taxed by Slave Status: Free" (AA7001)</li>
+    </ul>
+    <h6>1820 Census</h6>
+    <ul>
+      <li>Slave population: sum of "Nonwhite: slave" male and female columns 
+      for "Race/Slave Status by Sex" (ABB003 and ABB004)</li>
+      <li>Total population: (A00AA1820)</li>
+      <li>Free African American population: sum of "Nonwhite: free" male and 
+      female columns for "Race/Slave Status by Sex" (ABB005 and ABB006)</li>
+    </ul>
+    <h6>1830 Census</h6>
+    <ul>
+      <li>Slave population: sum of "Nonwhite: slave" male and female columns 
+      for "Race/Slave Status by Sex" (ABO003 and ABO004)</li>
+      <li>Total population: (A00AA1830)</li>
+      <li>Free African American population: sum of "Nonwhite: free" male and 
+      female columns for "Race/Slave Status by Sex" (ABO005 and ABO006)</li>
+    </ul>
+    <h6>1840 Census</h6>
+    <ul>
+      <li>Slave population: "Nonwhite: slave" column for "Race/Slave Status" 
+      (ACS003)</li>
+      <li>Total population: (A00AA1840)</li>
+      <li>Free African American population: "Nonwhite: free" column for 
+      "Race/Slave Status" (ACS002)</li>
+    </ul>
+    <h6>1850 Census</h6>
+    <ul>
+      <li>Slave population: "Nonwhite: slave" column for "Race/Slave Status" 
+      (AE6003)</li>
+      <li>Total population: (A00AA1840)</li>
+      <li>Free African American population: "Nonwhite: free" column for 
+      "Race/Slave Status" (AE6002)</li>
+    </ul>
+    <h6>1860 Census</h6>
+    <ul>
+      <li>Slave population: sum of "Slave" male and female columns for "Race 
+      by Sex" (AH2005 and AH2006)</li>
+      <li>Total population: (A00AA1860)</li>
+      <li>Free African American population: sum of "Free colored" male and 
+      female columns for "Race by Sex" (AH2003 and AH2004)</li>
+    </ul>
   </div>
 </div>
 </div>
