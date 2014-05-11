@@ -15,7 +15,7 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
     height = 500 - margin.top - margin.bottom,
     sliderHeight = 20,
     sliderWidth = 600,
-    maxZoom = 8,
+    maxZoom = 6,
     active = d3.select(null),
     brewer = ["", "q0-9", "q1-9", "q2-9", "q3-9", "q4-9",
               "q5-9", "q6-9", "q7-9", "q8-9"],
@@ -199,7 +199,7 @@ svg.append("rect").attr("class", "overlay")
   .attr("width", width).attr("height", height)
   .on("click", reset);
 
-svg.call(zoom).call(zoom.event);
+// svg.call(zoom).call(zoom.event); // uncomment to pan and zoom manually
 
 // Tooltip
 var tooltip = d3.select("body").append("div")
