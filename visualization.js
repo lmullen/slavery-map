@@ -73,6 +73,30 @@ var maps = {
             .domain([0.1,1,2.5,5,7.5,10,20,30,40,100])
             .range(brewer)
   },
+  "freeTotalPopulation": {
+    "field": "freeTotalPopulation",
+    "label": "Total free population",
+    "color": "BuPu",
+    "scale": d3.scale.threshold()
+            .domain([1,10,33,100,333,1e3,3.33e3,10e3,33.3e3,100e3])
+            .range(brewer)
+  },
+  "freeTotalDensity": {
+    "field": "freeTotalDensity",
+    "label": "All free persons/mile²",
+    "color": "BuPu",
+    "scale": d3.scale.threshold()
+            .domain([0.01,1,5,10,25,50,100,500,1e3,50e3])
+            .range(brewer)
+  },
+  "freeTotalPercentage": {
+    "field": "freeTotalPercentage",
+    "label": "All free persons (%)",
+    "color": "BuPu",
+    "scale": d3.scale.threshold()
+            .domain([0.1,20,30,40,50,60,70,80,90,100.001])
+            .range(brewer)
+  },
   "totalPopulation": {
     "field": "totalPopulation",
     "label": "Total population",
@@ -233,6 +257,9 @@ function ready(error, coast, us_1790, us_1800, us_1810, us_1820,
       d.properties.slaveDensity = d.properties.slavePopulation / sqMToSqMi(d.properties.area);
       d.properties.freeAfAmDensity = d.properties.freeAfAmPopulation / sqMToSqMi(d.properties.area);
       d.properties.totalDensity = d.properties.totalPopulation / sqMToSqMi(d.properties.area);
+      d.properties.freeTotalPopulation = d.properties.totalPopulation - d.properties.slavePopulation;
+      d.properties.freeTotalDensity = d.properties.freeTotalPopulation / sqMToSqMi(d.properties.area);
+      d.properties.freeTotalPercentage = 100 * d.properties.freeTotalPopulation / d.properties.totalPopulation;
     });
   }
 
@@ -251,11 +278,14 @@ function ready(error, coast, us_1790, us_1800, us_1810, us_1820,
 function tooltipText(d) {
   var sPop   = isNaN(d.properties.slavePopulation)    ? "n/a" : d.properties.slavePopulation,
       fbPop  = isNaN(d.properties.freeAfAmPopulation) ? "n/a" : d.properties.freeAfAmPopulation,
+      ftPop  = isNaN(d.properties.freeTotalPopulation) ? "n/a" : d.properties.freeTotalPopulation,
       sPerc  = isNaN(d.properties.slavePercentage)    ? "n/a" : percentageFormat(d.properties.slavePercentage / 100), 
       fbPerc = isNaN(d.properties.freeAfAmPercentage) ? "n/a" : percentageFormat(d.properties.freeAfAmPercentage / 100), 
+      ftPerc = isNaN(d.properties.freeTotalPercentage) ? "n/a" : percentageFormat(d.properties.freeTotalPercentage / 100), 
       tPop   = isNaN(d.properties.totalPopulation)    ? "n/a" : d.properties.totalPopulation,
       sDen   = isNaN(d.properties.slaveDensity)       ? "n/a" : densityFormat(d.properties.slaveDensity),
       fbDen  = isNaN(d.properties.freeAfAmDensity)    ? "n/a" : densityFormat(d.properties.freeAfAmDensity),
+      ftDen  = isNaN(d.properties.freeTotalDensity)    ? "n/a" : densityFormat(d.properties.freeTotalDensity),
       tDen   = isNaN(d.properties.totalDensity)       ? "n/a" : densityFormat(d.properties.totalDensity);
 
  return "<h5>" + d.properties.county + ", " + d.properties.state + "</h5>" +
@@ -269,6 +299,10 @@ function tooltipText(d) {
    "<td>" + fbPop.toLocaleString() + "</td>" +
    "<td style='width:65px;'>" + fbPerc + "</td>" +
    "</tr><tr>"+
+   "<td class='field'>Total free population: </td>" +
+   "<td>" + ftPop.toLocaleString() + "</td>" +
+   "<td style='width:65px;'>" + ftPerc + "</td>" +
+   "</tr><tr>"+
    "<td class='field'>Total population: </td>" +
    "<td>" + tPop.toLocaleString() + "</td>" +
    "<td></td>" +
@@ -278,6 +312,9 @@ function tooltipText(d) {
    "</tr><tr>"+
    "<td class='field'>Free African Americans/mile²: </td>" +
    "<td>" + fbDen + "</td>" +
+   "</tr><tr>"+
+   "<td class='field'>Total free persons/mile²: </td>" +
+   "<td>" + ftDen + "</td>" +
    "</tr><tr>"+
    "<td class='field'>All persons/mile²: </td>" +
    "<td>" + tDen + "</td>" +
