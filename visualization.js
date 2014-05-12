@@ -46,7 +46,7 @@ var maps = {
     "label": "Enslaved population (%)",
     "color": "YlOrRd",
     "scale": d3.scale.threshold()
-            .domain([0.1,1,10,20,30,40,50,60,70,100])
+            .domain([0.01,1,10,20,30,40,50,60,70,100])
             .range(brewer)
   },
   "freeAfAmPopulation": {
@@ -252,7 +252,7 @@ function tooltipText(d) {
   var sPop   = isNaN(d.properties.slavePopulation)    ? "n/a" : d.properties.slavePopulation,
       fbPop  = isNaN(d.properties.freeAfAmPopulation) ? "n/a" : d.properties.freeAfAmPopulation,
       sPerc  = isNaN(d.properties.slavePercentage)    ? "n/a" : percentageFormat(d.properties.slavePercentage / 100), 
-      fbPerc = isNaN(d.properties.freeAfAmPercentage) ? "n/a" : percentageFormat(d.properties.slavePercentage / 100), 
+      fbPerc = isNaN(d.properties.freeAfAmPercentage) ? "n/a" : percentageFormat(d.properties.freeAfAmPercentage / 100), 
       tPop   = isNaN(d.properties.totalPopulation)    ? "n/a" : d.properties.totalPopulation,
       sDen   = isNaN(d.properties.slaveDensity)       ? "n/a" : densityFormat(d.properties.slaveDensity),
       fbDen  = isNaN(d.properties.freeAfAmDensity)    ? "n/a" : densityFormat(d.properties.freeAfAmDensity),
