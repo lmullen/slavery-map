@@ -113,6 +113,10 @@ tr {
   user-select: none;
 }
 
+.background {
+  cursor: move!important;
+}
+
 .axis .domain {
   fill: none;
   stroke: #000;
