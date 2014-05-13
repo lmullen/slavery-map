@@ -1,13 +1,6 @@
 queue()
   .defer(d3.json, "coast.json")
-  .defer(d3.json, "us_1790.json")
-  .defer(d3.json, "us_1800.json")
-  .defer(d3.json, "us_1810.json")
-  .defer(d3.json, "us_1820.json")
-  .defer(d3.json, "us_1830.json")
-  .defer(d3.json, "us_1840.json")
-  .defer(d3.json, "us_1850.json")
-  .defer(d3.json, "us_1860.json")
+  .defer(d3.json, "us.json")
   .await(ready);
 
 var margin = {top: 10, right: 10, bottom: 10, left: 10},
@@ -230,8 +223,7 @@ var tooltip = d3.select("body").append("div")
   .classed("tooltip", true)
   .classed("hidden", true);
 
-function ready(error, coast, us_1790, us_1800, us_1810, us_1820,
-               us_1830, us_1840, us_1850, us_1860) { 
+function ready(error, coast, us) { 
 
   if (error) {
     loading.text("Sorry, there has been an error. " +
@@ -239,29 +231,22 @@ function ready(error, coast, us_1790, us_1800, us_1810, us_1820,
     console.log(error);
   }
 
-  data.coast   = coast;
-  data.us_1790 = us_1790;
-  data.us_1800 = us_1800;
-  data.us_1810 = us_1810;
-  data.us_1820 = us_1820;
-  data.us_1830 = us_1830;
-  data.us_1840 = us_1840;
-  data.us_1850 = us_1850;
-  data.us_1860 = us_1860;
+  data.coast = coast;
+  data.us    = us;
 
-  // Calculate derivative properties
-  for(var i = 1790; i <= 1860; i += 10) {
-    data["us_" + i].objects.county.geometries.forEach(function(d) {
-      d.properties.slavePercentage = 100 * d.properties.slavePopulation / d.properties.totalPopulation;
-      d.properties.freeAfAmPercentage = 100 * d.properties.freeAfAmPopulation / d.properties.totalPopulation;
-      d.properties.slaveDensity = d.properties.slavePopulation / sqMToSqMi(d.properties.area);
-      d.properties.freeAfAmDensity = d.properties.freeAfAmPopulation / sqMToSqMi(d.properties.area);
-      d.properties.totalDensity = d.properties.totalPopulation / sqMToSqMi(d.properties.area);
-      d.properties.freeTotalPopulation = d.properties.totalPopulation - d.properties.slavePopulation;
-      d.properties.freeTotalDensity = d.properties.freeTotalPopulation / sqMToSqMi(d.properties.area);
-      d.properties.freeTotalPercentage = 100 * d.properties.freeTotalPopulation / d.properties.totalPopulation;
-    });
-  }
+  // // Calculate derivative properties
+  // for(var i = 1790; i <= 1860; i += 10) {
+  //   data["us_" + i].objects.county.geometries.forEach(function(d) {
+  //     d.properties.slavePercentage = 100 * d.properties.slavePopulation / d.properties.totalPopulation;
+  //     d.properties.freeAfAmPercentage = 100 * d.properties.freeAfAmPopulation / d.properties.totalPopulation;
+  //     d.properties.slaveDensity = d.properties.slavePopulation / sqMToSqMi(d.properties.area);
+  //     d.properties.freeAfAmDensity = d.properties.freeAfAmPopulation / sqMToSqMi(d.properties.area);
+  //     d.properties.totalDensity = d.properties.totalPopulation / sqMToSqMi(d.properties.area);
+  //     d.properties.freeTotalPopulation = d.properties.totalPopulation - d.properties.slavePopulation;
+  //     d.properties.freeTotalDensity = d.properties.freeTotalPopulation / sqMToSqMi(d.properties.area);
+  //     d.properties.freeTotalPercentage = 100 * d.properties.freeTotalPopulation / d.properties.totalPopulation;
+  //   });
+  // }
 
     // data["us_" + 1800].objects.county.geometries.forEach(function(d) {
       // console.log((d.properties.whitePopulation));
@@ -288,7 +273,7 @@ function tooltipText(d) {
       ftDen  = isNaN(d.properties.freeTotalDensity)    ? "n/a" : densityFormat(d.properties.freeTotalDensity),
       tDen   = isNaN(d.properties.totalDensity)       ? "n/a" : densityFormat(d.properties.totalDensity);
 
- return "<h5>" + d.properties.county + ", " + d.properties.state + "</h5>" +
+ return "<h5>" + d.properties.c + ", " + d.properties.s + "</h5>" +
    "<table>" +
    "<tr>" +
    "<td class='field'>Slaves: </td>" +
@@ -340,8 +325,8 @@ function brushed() {
 
 function drawMap(date, map) {
 
-  var counties = topojson.feature(data["us_" + date],
-                                  data["us_" + date].objects.county);
+  var counties = topojson.feature(data.us,
+                                  data.us.objects["county_" + current.year]);
 
   svg.attr("class", map.color);
   svg.selectAll(".counties, .states, .country").remove();
@@ -373,22 +358,22 @@ function drawMap(date, map) {
       tooltip.classed("hidden", true);
     });
 
-  svg.append("path")
-    .datum(topojson.mesh(data["us_" + date], data["us_" + 
-                        date].objects.county,
-                          function(a, b) { 
-                            return a.properties.state !== b.properties.state; 
-                          }))
-    .attr("class", "decade-" + current.year)
-    .classed("states", true) .attr("d", path);
+  // svg.append("path")
+  //   .datum(topojson.mesh(data["us_" + date], data["us_" + 
+  //                       date].objects.county,
+  //                         function(a, b) { 
+  //                           return a.properties.state !== b.properties.state; 
+  //                         }))
+  //   .attr("class", "decade-" + current.year)
+  //   .classed("states", true) .attr("d", path);
 
-  svg.append("path")
-    .datum(topojson.mesh(data["us_" + date], 
-                        data["us_" + date].objects.county,
-                        function(a, b) { return a === b; }))
-    .attr("class", "decade-" + current.year)
-    .classed("country", true) 
-    .attr("d", path);
+  // svg.append("path")
+  //   .datum(topojson.mesh(data["us_" + date], 
+  //                       data["us_" + date].objects.county,
+  //                       function(a, b) { return a === b; }))
+  //   .attr("class", "decade-" + current.year)
+  //   .classed("country", true) 
+  //   .attr("d", path);
 
   svg.call(zoom.event);
 
