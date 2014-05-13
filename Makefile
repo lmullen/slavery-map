@@ -8,18 +8,20 @@ us.json:
 	  -o $@ \
 		-q 1e5 -s 0.2 \
 		--projection 'd3.geo.albers().scale(1000).translate([423, 240])' \
+		--id-property GISJOIN \
 		-p c=NHGISNAM \
 		-p s=STATENAM \
 		-p a=+SHAPE_AREA \
 		-- \
 		$(shapefiles)/county_1790.shp \
-		$(shapefiles)/county_1800.shp \
-    $(shapefiles)/county_1810.shp \
-		$(shapefiles)/county_1820.shp \
-		$(shapefiles)/county_1830.shp \
-		$(shapefiles)/county_1840.shp \
-		$(shapefiles)/county_1850.shp \
-		$(shapefiles)/county_1860.shp
+		$(shapefiles)/county_1800.shp 
+
+    # $(shapefiles)/county_1810.shp \
+		# $(shapefiles)/county_1820.shp \
+		# $(shapefiles)/county_1830.shp \
+		# $(shapefiles)/county_1840.shp \
+		# $(shapefiles)/county_1850.shp \
+		# $(shapefiles)/county_1860.shp
 
 # us_1790.json: $(shapefiles)/county_1790.shp
 # 	topojson -o $@ \

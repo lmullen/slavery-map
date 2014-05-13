@@ -1,6 +1,10 @@
+// var dataLookup = d3.map();
+
 queue()
   .defer(d3.json, "coast.json")
   .defer(d3.json, "us.json")
+  // .defer(d3.csv,  "census.csv", function(d) {dataLookup.set(d.GISJOIN, {s: +d.AAQ003, b: +d.AAQ001}); })
+  .defer(d3.csv,  "census.csv")
   .await(ready);
 
 var margin = {top: 10, right: 10, bottom: 10, left: 10},
@@ -223,7 +227,7 @@ var tooltip = d3.select("body").append("div")
   .classed("tooltip", true)
   .classed("hidden", true);
 
-function ready(error, coast, us) { 
+function ready(error, coast, us, census) { 
 
   if (error) {
     loading.text("Sorry, there has been an error. " +
@@ -231,8 +235,15 @@ function ready(error, coast, us) {
     console.log(error);
   }
 
-  data.coast = coast;
-  data.us    = us;
+  data.coast  = coast;
+  data.us     = us;
+  data.census = d3.nest()
+    .key( function(d) {return d.GISJOIN;})
+    .key( function(d) {return d.YEAR;})
+    .map(census, d3.map);
+
+
+  console.log(data.census);
 
   // // Calculate derivative properties
   // for(var i = 1790; i <= 1860; i += 10) {
@@ -336,8 +347,10 @@ function drawMap(date, map) {
     .enter()
     .append("path")
     .attr("class", function(d) {
-        return map.scale(d.properties[map.field]);
-      })
+      if(data.census.has(d.id)) { 
+        return map.scale(data.census.get(d.id).get(current.year.toString())[0][map.field]);
+      }
+    })
     .classed("na", function(d) {
       return isNaN(d.properties[map.field]) || typeof d.properties[map.field] === "undefined";
     })
