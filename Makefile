@@ -3,9 +3,8 @@ default: us.json coast.json census.csv
 shapefiles := ~/research-data/nhgis-shapefiles/epsg4326
 
 us.json:
-		node --max_old_space_size=7192 \
-		/usr/local/bin/topojson \
-	  -o $@ \
+		node --max_old_space_size=7192 /usr/local/bin/topojson \
+		-o $@ \
 		-q 1e5 -s 0.5 \
 		--projection 'd3.geo.albers().scale(1000).translate([423, 240])' \
 		--id-property GISJOIN \
@@ -14,7 +13,7 @@ us.json:
 		-- \
 		$(shapefiles)/county_1790.shp \
 		$(shapefiles)/county_1800.shp \
-    		$(shapefiles)/county_1810.shp \
+		$(shapefiles)/county_1810.shp \
 		$(shapefiles)/county_1820.shp \
 		$(shapefiles)/county_1830.shp \
 		$(shapefiles)/county_1840.shp \
