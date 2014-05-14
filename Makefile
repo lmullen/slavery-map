@@ -47,7 +47,7 @@ clobber:
 
 deploy:
 	rsync --progress --delete -avz \
-		*.json *.html *.css *.js \
+		*.json *.html *.css *.js *.csv \
 		reclaim:~/public_html/lincolnmullen.com/projects/slavery/
 
 .PHONY : default clean clobber deploy
