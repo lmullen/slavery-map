@@ -134,4 +134,4 @@ c_1860 <- csv$nhgis0016_ds14_1860_county %.%
 # Join all the data together
 all <- rbind(c_1790, c_1800, c_1810, c_1820, c_1830, c_1840, c_1850, c_1860)
 
-write.csv(all, "census.csv")
+write.csv(all, "census.csv", na = "")
