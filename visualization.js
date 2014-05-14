@@ -1,9 +1,6 @@
-// var dataLookup = d3.map();
-
 queue()
   .defer(d3.json, "coast.json")
   .defer(d3.json, "us.json")
-  // .defer(d3.csv,  "census.csv", function(d) {dataLookup.set(d.GISJOIN, {s: +d.AAQ003, b: +d.AAQ001}); })
   .defer(d3.csv,  "census.csv")
   .await(ready);
 
@@ -75,7 +72,7 @@ var maps = {
     "label": "Total free population",
     "color": "BuPu",
     "scale": d3.scale.threshold()
-            .domain([1,10,33,100,333,1e3,3.33e3,10e3,33.3e3,100e3])
+            .domain([10,33,100,333,1e3,3.33e3,10e3,33.3e3,100e3,1e6])
             .range(brewer)
   },
   "freeTotalDensity": {
@@ -239,29 +236,8 @@ function ready(error, coast, us, census) {
   data.us     = us;
   data.census = d3.nest()
     .key( function(d) {return d.GISJOIN;})
-    .key( function(d) {return d.YEAR;})
+    .key( function(d) {return d.year;})
     .map(census, d3.map);
-
-
-  console.log(data.census);
-
-  // // Calculate derivative properties
-  // for(var i = 1790; i <= 1860; i += 10) {
-  //   data["us_" + i].objects.county.geometries.forEach(function(d) {
-  //     d.properties.slavePercentage = 100 * d.properties.slavePopulation / d.properties.totalPopulation;
-  //     d.properties.freeAfAmPercentage = 100 * d.properties.freeAfAmPopulation / d.properties.totalPopulation;
-  //     d.properties.slaveDensity = d.properties.slavePopulation / sqMToSqMi(d.properties.area);
-  //     d.properties.freeAfAmDensity = d.properties.freeAfAmPopulation / sqMToSqMi(d.properties.area);
-  //     d.properties.totalDensity = d.properties.totalPopulation / sqMToSqMi(d.properties.area);
-  //     d.properties.freeTotalPopulation = d.properties.totalPopulation - d.properties.slavePopulation;
-  //     d.properties.freeTotalDensity = d.properties.freeTotalPopulation / sqMToSqMi(d.properties.area);
-  //     d.properties.freeTotalPercentage = 100 * d.properties.freeTotalPopulation / d.properties.totalPopulation;
-  //   });
-  // }
-
-    // data["us_" + 1800].objects.county.geometries.forEach(function(d) {
-      // console.log((d.properties.whitePopulation));
-    // });
 
   // Draw the map for the first time
   slider.call(brush.event).call(brush.extent([1790, 1790])).call(brush.event);
@@ -272,17 +248,36 @@ function ready(error, coast, us, census) {
 }  
 
 function tooltipText(d) {
-  var sPop   = isNaN(d.properties.slavePopulation)    ? "n/a" : d.properties.slavePopulation,
-      fbPop  = isNaN(d.properties.freeAfAmPopulation) ? "n/a" : d.properties.freeAfAmPopulation,
-      ftPop  = isNaN(d.properties.freeTotalPopulation) ? "n/a" : d.properties.freeTotalPopulation,
-      sPerc  = isNaN(d.properties.slavePercentage)    ? "n/a" : percentageFormat(d.properties.slavePercentage / 100), 
-      fbPerc = isNaN(d.properties.freeAfAmPercentage) ? "n/a" : percentageFormat(d.properties.freeAfAmPercentage / 100), 
-      ftPerc = isNaN(d.properties.freeTotalPercentage) ? "n/a" : percentageFormat(d.properties.freeTotalPercentage / 100), 
-      tPop   = isNaN(d.properties.totalPopulation)    ? "n/a" : d.properties.totalPopulation,
-      sDen   = isNaN(d.properties.slaveDensity)       ? "n/a" : densityFormat(d.properties.slaveDensity),
-      fbDen  = isNaN(d.properties.freeAfAmDensity)    ? "n/a" : densityFormat(d.properties.freeAfAmDensity),
-      ftDen  = isNaN(d.properties.freeTotalDensity)    ? "n/a" : densityFormat(d.properties.freeTotalDensity),
-      tDen   = isNaN(d.properties.totalDensity)       ? "n/a" : densityFormat(d.properties.totalDensity);
+
+  var val;
+  var sPop   = "n/a",
+      fbPop  = "n/a",
+      ftPop  = "n/a",
+      sPerc  = "n/a",
+      fbPerc = "n/a",
+      ftPerc = "n/a",
+      tPop   = "n/a",
+      sDen   = "n/a",
+      fbDen  = "n/a",
+      ftDen  = "n/a",
+      tDen   = "n/a";
+
+  if (data.census.has(d.id) && data.census.get(d.id).has(current.year.toString())) {
+
+    val = data.census.get(d.id).get(current.year.toString())[0];
+
+    sPop   = val.slavePopulation;
+    fbPop  = val.freeAfAmPopulation;
+    ftPop  = val.freeTotalPopulation;
+    sPerc  = percentageFormat(val.slavePercentage / 100); 
+    fbPerc = percentageFormat(val.freeAfAmPercentage / 100); 
+    ftPerc = percentageFormat(val.freeTotalPercentage / 100);
+    tPop   = val.totalPopulation;
+    sDen   = densityFormat(val.slaveDensity);
+    fbDen  = densityFormat(val.freeAfAmDensity);
+    ftDen  = densityFormat(val.freeTotalDensity);
+    tDen   = densityFormat(val.totalDensity);
+  }
 
  return "<h5>" + d.properties.c + ", " + d.properties.s + "</h5>" +
    "<table>" +
@@ -347,12 +342,12 @@ function drawMap(date, map) {
     .enter()
     .append("path")
     .attr("class", function(d) {
-      if(data.census.has(d.id)) { 
+      if(data.census.has(d.id) && data.census.get(d.id).has(current.year.toString())) { 
         return map.scale(data.census.get(d.id).get(current.year.toString())[0][map.field]);
       }
     })
     .classed("na", function(d) {
-      return isNaN(d.properties[map.field]) || typeof d.properties[map.field] === "undefined";
+      return !data.census.has(d.id) || !data.census.get(d.id).has(current.year.toString());
     })
     .classed("counties", true)
     .attr("id", function(d) { return d.id; })
@@ -371,22 +366,20 @@ function drawMap(date, map) {
       tooltip.classed("hidden", true);
     });
 
-  // svg.append("path")
-  //   .datum(topojson.mesh(data["us_" + date], data["us_" + 
-  //                       date].objects.county,
-  //                         function(a, b) { 
-  //                           return a.properties.state !== b.properties.state; 
-  //                         }))
-  //   .attr("class", "decade-" + current.year)
-  //   .classed("states", true) .attr("d", path);
+  svg.append("path")
+    .datum(topojson.mesh(data.us, data.us.objects["county_" + current.year],
+                          function(a, b) { 
+                            return a.properties.s !== b.properties.s; 
+                          }))
+    .attr("class", "decade-" + current.year)
+    .classed("states", true) .attr("d", path);
 
-  // svg.append("path")
-  //   .datum(topojson.mesh(data["us_" + date], 
-  //                       data["us_" + date].objects.county,
-  //                       function(a, b) { return a === b; }))
-  //   .attr("class", "decade-" + current.year)
-  //   .classed("country", true) 
-  //   .attr("d", path);
+  svg.append("path")
+    .datum(topojson.mesh(data.us, data.us.objects["county_" + current.year],
+                        function(a, b) { return a === b; }))
+    .attr("class", "decade-" + current.year)
+    .classed("country", true) 
+    .attr("d", path);
 
   svg.call(zoom.event);
 
@@ -446,11 +439,6 @@ function updateLegend(map) {
 
 }
 
-// Convert square meters to square miles
-function sqMToSqMi(sqMeters) {
-  return sqMeters / 2589988.110336;
-}
-
 function clicked(d) {
   if (active.node() === this) return reset();
   active.classed("active", false);
@@ -490,9 +478,3 @@ function zoomed() {
 function stopped() {
   if (d3.event.defaultPrevented) d3.event.stopPropagation();
 }
-
-d3.selection.prototype.moveToFront = function() {
-  return this.each(function(){
-    this.parentNode.appendChild(this);
-  });
-};
