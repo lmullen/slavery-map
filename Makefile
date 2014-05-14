@@ -14,7 +14,7 @@ us.json:
 		-- \
 		$(shapefiles)/county_1790.shp \
 		$(shapefiles)/county_1800.shp \
-    $(shapefiles)/county_1810.shp \
+    		$(shapefiles)/county_1810.shp \
 		$(shapefiles)/county_1820.shp \
 		$(shapefiles)/county_1830.shp \
 		$(shapefiles)/county_1840.shp \
