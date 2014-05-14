@@ -10,6 +10,7 @@ us.json:
 		--id-property GISJOIN \
 		-p c=NHGISNAM \
 		-p s=STATENAM \
+		--filter=small \
 		-- \
 		$(shapefiles)/county_1790.shp \
 		$(shapefiles)/county_1800.shp \
