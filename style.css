@@ -175,3 +175,19 @@ body #back-link {
   stroke-linecap: round!important;
   stroke-linejoin: round!important;
 }
+
+#attention {
+  background-color: rgba(39,112,230,.145);
+  display: block;
+  padding: 1rem;
+  max-width: 800px;
+} 
+#attention p {
+  margin-bottom: 0;
+  font-weight: bold;
+}
+#attention p a,
+#attention p a:hover,
+#attention p a:visited {
+  color:#ac4142;
+}
